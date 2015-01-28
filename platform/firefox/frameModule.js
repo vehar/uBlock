@@ -30,6 +30,8 @@ const {Services} = Cu.import('resource://gre/modules/Services.jsm', null);
 const hostName = Services.io.newURI(Components.stack.filename, null, null).host;
 let uniqueSandboxId = 1;
 
+// Cu.import('resource://gre/modules/devtools/Console.jsm');
+
 /******************************************************************************/
 
 const getMessageManager = function(win) {
@@ -110,34 +112,26 @@ const contentObserver = {
         );
     },
 
+    getFrameId: function(win) {
+        return win
+            .QueryInterface(Ci.nsIInterfaceRequestor)
+            .getInterface(Ci.nsIDOMWindowUtils)
+            .outerWindowID;
+    },
+
     // https://bugzil.la/612921
     shouldLoad: function(type, location, origin, context) {
-        // If we don't know what initiated the request, probably it's not a tab
         if ( !context ) {
             return this.ACCEPT;
         }
 
-        let openerURL;
-
         if ( !location.schemeIs('http') && !location.schemeIs('https') ) {
-            if ( type !== this.MAIN_FRAME ) {
-                return this.ACCEPT;
-            }
+            return this.ACCEPT;
+        }
 
-            context = context.contentWindow || context;
+        let openerURL = null;
 
-            try {
-                if ( context !== context.opener ) {
-                    openerURL = context.opener.location.href;
-                }
-            } catch (ex) {}
-
-            let isPopup = location.spec === 'about:blank' && openerURL;
-
-            if ( !location.schemeIs('data') && !isPopup ) {
-                return this.ACCEPT;
-            }
-        } else if ( type === this.MAIN_FRAME ) {
+        if ( type === this.MAIN_FRAME ) {
             context = context.contentWindow || context;
 
             try {
@@ -151,26 +145,36 @@ const contentObserver = {
 
         // The context for the toolbar popup is an iframe element here,
         // so check context.top instead of context
-        if ( context.top && context.location ) {
+        if ( !context.top || !context.location ) {
+            return this.ACCEPT;
+        }
+
+        let isTopLevel = context === context.top;
+        let parentFrameId;
+
+        if ( isTopLevel ) {
+            parentFrameId = -1;
+        } else if ( context.parent === context.top ) {
+            parentFrameId = 0;
+        } else {
+            parentFrameId = this.getFrameId(context.parent);
+        }
+
+        let messageManager = getMessageManager(context);
+        let details = {
+            frameId: isTopLevel ? 0 : this.getFrameId(context),
+            openerURL: openerURL,
+            parentFrameId: parentFrameId,
+            type: type,
+            url: location.spec
+        };
+
+        if ( typeof messageManager.sendRpcMessage === 'function' ) {
             // https://bugzil.la/1092216
-            let messageManager = getMessageManager(context);
-            let details = {
-                openerURL: openerURL || null,
-                url: location.spec,
-                type: type,
-                frameId: type === this.MAIN_FRAME ? -1 : (context === context.top ? 0 : 1),
-                parentFrameId: context === context.top ? -1 : 0
-            };
-
-            // TODO: frameId from outerWindowID?
-            // https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIDOMWindowUtils
-
-            if ( typeof messageManager.sendRpcMessage === 'function' ) {
-                messageManager.sendRpcMessage(this.cpMessageName, details);
-            } else {
-                // Compatibility for older versions
-                messageManager.sendSyncMessage(this.cpMessageName, details);
-            }
+            messageManager.sendRpcMessage(this.cpMessageName, details);
+        } else {
+            // Compatibility for older versions
+            messageManager.sendSyncMessage(this.cpMessageName, details);
         }
 
         return this.ACCEPT;
@@ -193,14 +197,9 @@ const contentObserver = {
                 wantXHRConstructor: false
             });
 
-            sandbox.injectScript = function(script, evalCode) {
-                if ( evalCode ) {
-                    Cu.evalInSandbox(script, this);
-                    return;
-                }
-
-                Services.scriptloader.loadSubScript(script, this);
-            }.bind(sandbox);
+            sandbox.injectScript = function(script) {
+                Services.scriptloader.loadSubScript(script, sandbox);
+            };
         }
         else {
             sandbox = win;
@@ -208,43 +207,45 @@ const contentObserver = {
 
         sandbox._sandboxId_ = sandboxId;
         sandbox.sendAsyncMessage = messager.sendAsyncMessage;
+
         sandbox.addMessageListener = function(callback) {
-            if ( this._messageListener_ ) {
-                this.removeMessageListener(
-                    this._sandboxId_,
-                    this._messageListener_
+            if ( sandbox._messageListener_ ) {
+                sandbox.removeMessageListener(
+                    sandbox._sandboxId_,
+                    sandbox._messageListener_
                 );
             }
 
-            this._messageListener_ = function(message) {
+            sandbox._messageListener_ = function(message) {
                 callback(message.data);
             };
 
             messager.addMessageListener(
-                this._sandboxId_,
-                this._messageListener_
+                sandbox._sandboxId_,
+                sandbox._messageListener_
             );
             messager.addMessageListener(
                 hostName + ':broadcast',
-                this._messageListener_
+                sandbox._messageListener_
             );
-        }.bind(sandbox);
+        };
+
         sandbox.removeMessageListener = function() {
             try {
                 messager.removeMessageListener(
-                    this._sandboxId_,
-                    this._messageListener_
+                    sandbox._sandboxId_,
+                    sandbox._messageListener_
                 );
                 messager.removeMessageListener(
                     hostName + ':broadcast',
-                    this._messageListener_
+                    sandbox._messageListener_
                 );
             } catch (ex) {
                 // It throws sometimes, mostly when the popup closes
             }
 
-            this._messageListener_ = null;
-        }.bind(sandbox);
+            sandbox._messageListener_ = null;
+        };
 
         return sandbox;
     },

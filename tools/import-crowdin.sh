@@ -27,6 +27,7 @@ cp $SRC/hu/messages.json    $DES/hu/messages.json
 cp $SRC/id/messages.json    $DES/id/messages.json
 cp $SRC/it/messages.json    $DES/it/messages.json
 cp $SRC/ja/messages.json    $DES/ja/messages.json
+cp $SRC/lv/messages.json    $DES/lv/messages.json
 cp $SRC/mr/messages.json    $DES/mr/messages.json
 cp $SRC/no/messages.json    $DES/nb/messages.json
 cp $SRC/nl/messages.json    $DES/nl/messages.json
@@ -62,6 +63,7 @@ cp $SRC/hu/description.txt    $DES/description-hu.txt
 cp $SRC/id/description.txt    $DES/description-id.txt
 cp $SRC/it/description.txt    $DES/description-it.txt
 cp $SRC/ja/description.txt    $DES/description-ja.txt
+cp $SRC/lv/description.txt    $DES/description-lv.txt
 cp $SRC/no/description.txt    $DES/description-no.txt
 cp $SRC/nl/description.txt    $DES/description-nl.txt
 cp $SRC/pl/description.txt    $DES/description-pl.txt
@@ -72,7 +74,7 @@ cp $SRC/ru/description.txt    $DES/description-ru.txt
 cp $SRC/sv-SE/description.txt $DES/description-sv.txt
 cp $SRC/tr/description.txt    $DES/description-tr.txt
 cp $SRC/uk/description.txt    $DES/description-uk.txt
-#cp $SRC/vi/description.txt    $DES/description-vi.txt
+cp $SRC/vi/description.txt    $DES/description-vi.txt
 cp $SRC/zh-CN/description.txt $DES/description-zh_CN.txt
 #cp $SRC/zh-TW/description.txt $DES/description-zh_TW.txt
 

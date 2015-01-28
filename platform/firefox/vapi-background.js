@@ -252,19 +252,6 @@ vAPI.storage = {
 /******************************************************************************/
 
 var windowWatcher = {
-    onTabClose: function(e) {
-        var tabId = vAPI.tabs.getTabId(e.target);
-        vAPI.tabs.onClosed(tabId);
-        delete vAPI.toolbarButton.tabs[tabId];
-    },
-
-    onTabSelect: function(e) {
-        vAPI.setIcon(
-            vAPI.tabs.getTabId(e.target),
-            e.target.ownerDocument.defaultView
-        );
-    },
-
     onReady: function(e) {
         if ( e ) {
             this.removeEventListener(e.type, windowWatcher.onReady);
@@ -282,9 +269,9 @@ var windowWatcher = {
 
         var tC = this.gBrowser.tabContainer;
 
-        this.gBrowser.addTabsProgressListener(tabsProgressListener);
-        tC.addEventListener('TabClose', windowWatcher.onTabClose);
-        tC.addEventListener('TabSelect', windowWatcher.onTabSelect);
+        this.gBrowser.addTabsProgressListener(tabWatcher);
+        tC.addEventListener('TabClose', tabWatcher.onTabClose);
+        tC.addEventListener('TabSelect', tabWatcher.onTabSelect);
 
         vAPI.contextMenu.register(this.document);
 
@@ -300,7 +287,30 @@ var windowWatcher = {
 
 /******************************************************************************/
 
-var tabsProgressListener = {
+var tabWatcher = {
+    onTabClose: function({target: tab}) {
+        var tabId = vAPI.tabs.getTabId(tab);
+        vAPI.tabs.onClosed(tabId);
+        delete vAPI.toolbarButton.tabs[tabId];
+    },
+
+    onTabSelect: function({target: tab}) {
+        var URI = tab.linkedBrowser.currentURI;
+        var aboutPath = URI.schemeIs('about') && URI.path;
+        var tabId = vAPI.tabs.getTabId(tab);
+
+        if ( !aboutPath || (aboutPath !== 'blank' && aboutPath !== 'newtab') ) {
+            vAPI.setIcon(tabId, tab.ownerDocument.defaultView);
+            return;
+        }
+
+        vAPI.tabs.onNavigation({
+            frameId: 0,
+            tabId: tabId,
+            url: URI.asciiSpec
+        });
+    },
+
     onLocationChange: function(browser, webProgress, request, location, flags) {
         if ( !webProgress.isTopLevel ) {
             return;
@@ -330,22 +340,22 @@ var tabsProgressListener = {
 
 /******************************************************************************/
 
+vAPI.isNoTabId = function(tabId) {
+    return tabId.toString() === '-1';
+};
+
+vAPI.noTabId = '-1';
+
+/******************************************************************************/
+
 vAPI.tabs = {};
 
 /******************************************************************************/
 
-vAPI.isNoTabId = function(tabId) {
-    return tabId.toString() === '_';
-};
-
-vAPI.noTabId = '_';
-
-/******************************************************************************/
-
 vAPI.tabs.registerListeners = function() {
-    // onNavigation and onUpdated handled with tabsProgressListener
-    // onClosed - handled in windowWatcher.onTabClose
-    // onPopup ?
+    // onNavigation and onUpdated handled with tabWatcher.onLocationChange
+    // onClosed - handled in tabWatcher.onTabClose
+    // onPopup - handled in httpObserver.handlePopup
 
     for ( var win of this.getWindows() ) {
         windowWatcher.onReady.call(win);
@@ -360,11 +370,11 @@ vAPI.tabs.registerListeners = function() {
             vAPI.contextMenu.unregister(win.document);
 
             win.removeEventListener('DOMContentLoaded', windowWatcher.onReady);
-            win.gBrowser.removeTabsProgressListener(tabsProgressListener);
+            win.gBrowser.removeTabsProgressListener(tabWatcher);
 
             var tC = win.gBrowser.tabContainer;
-            tC.removeEventListener('TabClose', windowWatcher.onTabClose);
-            tC.removeEventListener('TabSelect', windowWatcher.onTabSelect);
+            tC.removeEventListener('TabClose', tabWatcher.onTabClose);
+            tC.removeEventListener('TabSelect', tabWatcher.onTabSelect);
 
             // close extension tabs
             for ( var tab of win.gBrowser.tabs ) {
@@ -387,10 +397,18 @@ vAPI.tabs.getTabId = function(target) {
 
     var i, gBrowser = target.ownerDocument.defaultView.gBrowser;
 
+    if ( !gBrowser ) {
+        return -1;
+    }
+
     // This should be more efficient from version 35
     if ( gBrowser.getTabForBrowser ) {
         i = gBrowser.getTabForBrowser(target);
         return i ? i.linkedPanel : -1;
+    }
+
+    if ( !gBrowser.browsers ) {
+        return -1;
     }
 
     i = gBrowser.browsers.indexOf(target);
@@ -592,11 +610,11 @@ vAPI.tabs.injectScript = function(tabId, details, callback) {
         return;
     }
 
-    if ( details.file ) {
-        details.file = vAPI.getURL(details.file);
+    if ( typeof details.file !== 'string' ) {
+        return;
     }
 
-
+    details.file = vAPI.getURL(details.file);
     tab.linkedBrowser.messageManager.sendAsyncMessage(
         location.host + ':broadcast',
         JSON.stringify({
@@ -628,10 +646,7 @@ vAPI.setIcon = function(tabId, iconStatus, badge) {
     if ( tabId === undefined ) {
         tabId = curTabId;
     } else if ( badge !== undefined ) {
-        tb.tabs[tabId] = {
-            badge: badge,
-            img: iconStatus === 'on'
-        };
+        tb.tabs[tabId] = { badge: badge, img: iconStatus === 'on' };
     }
 
     if ( tabId !== curTabId ) {
@@ -795,6 +810,7 @@ var httpObserver = {
     VALID_CSP_TARGETS: 1 << Ci.nsIContentPolicy.TYPE_DOCUMENT |
                        1 << Ci.nsIContentPolicy.TYPE_SUBDOCUMENT,
     typeMap: {
+        1: 'other',
         2: 'script',
         3: 'image',
         4: 'stylesheet',
@@ -891,7 +907,7 @@ var httpObserver = {
         return result === true;
     },
 
-    handleRequest: function(channel, details) {
+    handleRequest: function(channel, URI, details) {
         var onBeforeRequest = vAPI.net.onBeforeRequest;
         var type = this.typeMap[details.type] || 'other';
 
@@ -901,11 +917,11 @@ var httpObserver = {
 
         var result = onBeforeRequest.callback({
             frameId: details.frameId,
-            hostname: channel.URI.asciiHost,
+            hostname: URI.asciiHost,
             parentFrameId: details.parentFrameId,
             tabId: details.tabId,
             type: type,
-            url: channel.URI.asciiSpec
+            url: URI.asciiSpec
         });
 
         if ( !result || typeof result !== 'object' ) {
@@ -942,7 +958,13 @@ var httpObserver = {
             }
 
             try {
-                // [type, tabId, sourceTabId - given if it was a popup]
+                /*[
+                    type,
+                    tabId,
+                    sourceTabId - given if it was a popup,
+                    frameId,
+                    parentFrameId
+                ]*/
                 channelData = channel.getProperty(location.host + 'reqdata');
             } catch (ex) {
                 return;
@@ -966,7 +988,7 @@ var httpObserver = {
 
             result = vAPI.net.onHeadersReceived.callback({
                 hostname: URI.asciiHost,
-                parentFrameId: channelData[0] === this.MAIN_FRAME ? -1 : 0,
+                parentFrameId: channelData[4],
                 responseHeaders: result ? [{name: topic, value: result}] : [],
                 tabId: channelData[1],
                 url: URI.asciiSpec
@@ -987,8 +1009,8 @@ var httpObserver = {
 
         var lastRequest = this.lastRequest;
 
-        if ( !lastRequest.url || lastRequest.url !== URI.spec ) {
-            lastRequest.url = null;
+        if ( lastRequest.url === null ) {
+            this.handleRequest(channel, URI, {tabId: vAPI.noTabId, type: 1});
             return;
         }
 
@@ -1023,7 +1045,7 @@ var httpObserver = {
             }
         }
 
-        if ( this.handleRequest(channel, lastRequest) ) {
+        if ( this.handleRequest(channel, URI, lastRequest) ) {
             return;
         }
 
@@ -1031,7 +1053,13 @@ var httpObserver = {
         if ( channel instanceof Ci.nsIWritablePropertyBag ) {
             channel.setProperty(
                 location.host + 'reqdata',
-                [lastRequest.type, lastRequest.tabId, sourceTabId]
+                [
+                    lastRequest.type,
+                    lastRequest.tabId,
+                    sourceTabId,
+                    lastRequest.frameId,
+                    lastRequest.parentFrameId
+                ]
             );
         }
     },
@@ -1058,23 +1086,24 @@ var httpObserver = {
                 return;
             }
 
+            // TODO: what if a behind-the-scene request is being redirected?
+            // This data is present only for tabbed requests, so if this throws,
+            // the redirection won't be evaluated and canceled (if necessary)
             var channelData = oldChannel.getProperty(location.host + 'reqdata');
-            var [type, tabId, sourceTabId] = channelData;
 
-            if ( this.handlePopup(URI, tabId, sourceTabId) ) {
+            if ( this.handlePopup(URI, channelData[1], channelData[2]) ) {
                 result = this.ABORT;
                 return;
             }
 
             var details = {
-                type: type,
-                tabId: tabId,
-                // well...
-                frameId: type === this.MAIN_FRAME ? -1 : 0,
-                parentFrameId: -1
+                type: channelData[0],
+                tabId: channelData[1],
+                frameId: channelData[3],
+                parentFrameId: channelData[4]
             };
 
-            if ( this.handleRequest(newChannel, details) ) {
+            if ( this.handleRequest(newChannel, URI, details) ) {
                 result = this.ABORT;
                 return;
             }
@@ -1106,19 +1135,6 @@ vAPI.net.registerListeners = function() {
     var shouldLoadListenerMessageName = location.host + ':shouldLoad';
     var shouldLoadListener = function(e) {
         var details = e.data;
-
-        // data: and about:blank
-        if ( details.url.charAt(0) !== 'h' ) {
-            vAPI.net.onBeforeRequest.callback({
-                frameId: details.frameId,
-                parentFrameId: details.parentFrameId,
-                tabId: vAPI.tabs.getTabId(e.target),
-                type: 'main_frame',
-                url: 'http://' + details.url.slice(0, details.url.indexOf(':'))
-            });
-            return;
-        }
-
         var lastRequest = httpObserver.lastRequest;
         lastRequest.url = details.url;
         lastRequest.type = details.type;
