@@ -4,319 +4,319 @@
     "description":"extension name."
   },
   "extShortDesc":{
-    "message":"Beidzot, efektīvs bloķētājs. Nepārslogo procesoru un atmiņu.",
+    "message":"بالاخره، یک بلاکر کارآمد. کم حجم بر روی پردازنده و حافظه.",
     "description":"this will be in the chrome web store: must be 132 characters or less"
   },
   "dashboardName":{
-    "message":"µBlock — Vadības panelis",
+    "message":"µBlock — داشبورد",
     "description":"English: µBlock — Dashboard"
   },
   "settingsPageName":{
-    "message":"Iestatījumi",
+    "message":"تنظیمات",
     "description":"appears as tab name in dashboard"
   },
   "3pPageName":{
-    "message":"Trešo pušu filtri",
+    "message":"فیلتر های خارجی",
     "description":"appears as tab name in dashboard"
   },
   "1pPageName":{
-    "message":"Mani filtri",
+    "message":"فیلترهای من",
     "description":"appears as tab name in dashboard"
   },
   "rulesPageName":{
-    "message":"Mani noteikumi",
+    "message":"قوانین من",
     "description":"appears as tab name in dashboard"
   },
   "whitelistPageName":{
-    "message":"Atļautais saraksts",
+    "message":"لیست سپید",
     "description":"appears as tab name in dashboard"
   },
   "statsPageName":{
-    "message":"µBlock — Tīkla pieprasījumu žurnāls",
+    "message":"µBlock — لاگ درخواست های شبکه",
     "description":"Title for the network request log window"
   },
   "aboutPageName":{
-    "message":"Par",
+    "message":"در باره",
     "description":"appears as tab name in dashboard"
   },
   "popupPowerSwitchInfo":{
-    "message":"Klikšķis: atslēgt\/ieslēgt µBlock šajā vietnē.\n\nCtrl+klikšķis: atslēgt µBlock tikai šai lapai.",
+    "message":"کلیک: غیر فعال\/ فعال کردن µBlock برای این سایت.\n\nکنترل+کلیک: غیر فعال کردن µBlock فقط برای همین صفحه.",
     "description":"English: Click: disable\/enable µBlock for this site.\n\nCtrl+click: disable µBlock only on this page."
   },
   "popupBlockedRequestPrompt":{
-    "message":"bloķētie pieprasījumi",
+    "message":"درخواست مسدود شده",
     "description":"English: requests blocked"
   },
   "popupBlockedOnThisPagePrompt":{
-    "message":"šajā lapā",
+    "message":"در این صفحه",
     "description":"English: on this page"
   },
   "popupBlockedSinceInstallPrompt":{
-    "message":"kopš instalācijas brīža",
+    "message":"از زمان نصب",
     "description":"English: since install"
   },
   "popupOr":{
-    "message":"vai",
+    "message":"یا",
     "description":"English: or"
   },
   "popupTipDashboard":{
-    "message":"Noklikšķiniet, lai atvērtu vadības paneli",
+    "message":"برای باز کردن داشبورد کلیک کنید",
     "description":"English: Click to open the dashboard"
   },
   "popupTipPicker":{
-    "message":"Ienākt elementa atlasītāju režīmā",
+    "message":"ورود به حالت انتخاب اشیاء",
     "description":"English: Enter element picker mode"
   },
   "popupTipLog":{
-    "message":"Doties uz pieprasījumu žurnālu",
+    "message":"رفتن به لاگ درخواست",
     "description":"English: Go to request log"
   },
   "popupSiteInlineScriptEnabled":{
-    "message":"Inline <code>skripta<\/code> tagi ir <b>atļauti<\/b> šajā vietnē",
+    "message":"تگ های خطی <code>اسکریپت<\/code> در این سایت <b>مجاز<\/b> هستند",
     "description":""
   },
   "popupSiteInlineScriptDisabled":{
-    "message":"Inline <code>skripta<\/code> tagi ir <b>bloķēti<\/b> šajā vietnē",
+    "message":"تگ های خطی <code>اسکریپت<\/code> در این سایت <b>غیرمجاز<\/b> هستند",
     "description":""
   },
   "popupSite1pScriptEnabled":{
-    "message":"1st-party skripti ir <b>atļauti<\/b> šajā vietnē",
+    "message":"اسکریپت های 1st-party در این سایت <b>مجاز<\/b> هستند",
     "description":""
   },
   "popupSite1pScriptDisabled":{
-    "message":"1st-party skripti ir <b>bloķēti<\/b> šajā vietnē",
+    "message":"اسکریپت های 1st-party در این سایت <b>غیرمجاز<\/b> هستند",
     "description":""
   },
   "popupSite3pScriptEnabled":{
-    "message":"3rd-party skripti ir <b>atļauti<\/b> šajā vietnē",
+    "message":"اسکریپت های 3rd-party در این سایت <b>مجاز<\/b> هستند",
     "description":""
   },
   "popupSite3pScriptDisabled":{
-    "message":"3rd-party skripti ir <b>bloķēti<\/b> šajā vietnē",
+    "message":"اسکریپت های 3rd-party در این سایت <b>غیرمجاز<\/b> هستند",
     "description":""
   },
   "popupSite1pFrameEnabled":{
-    "message":"1st-party freimi ir <b>atļauti<\/b> šajā vietnē",
+    "message":"فریم های 1st-party در این سایت <b>مجاز<\/b> هستند",
     "description":""
   },
   "popupSite1pFrameDisabled":{
-    "message":"1st-party freimi ir <b>bloķēti<\/b> šajā vietnē",
+    "message":"فریم های 1st-party در این سایت <b>غیرمجاز<\/b> هستند",
     "description":""
   },
   "popupSite3pFrameEnabled":{
-    "message":"3rd-party freimi ir <b>atļauti<\/b> šajā vietnē",
+    "message":"فریم های 3rd-party در این سایت <b>مجاز<\/b> هستند",
     "description":""
   },
   "popupSite3pFrameDisabled":{
-    "message":"3rd-party freimi ir <b>bloķēti<\/b> šajā vietnē",
+    "message":"فریم های 3rd-party در این سایت <b>غیرمجاز<\/b> هستند",
     "description":""
   },
   "popupDefaultInlineScriptEnabled":{
-    "message":"Inline <code>skripta<\/code> tagi ir <b>atļauti<\/b> visur pēc noklusējuma",
+    "message":"تگ های خطی <code>اسکریپت<\/code> بصورت پیشفرض در همه جا <b>مجاز<\/b> هستند",
     "description":""
   },
   "popupDefaultInlineScriptDisabled":{
-    "message":"Inline <code>skripta<\/code> tagi ir <b>bloķēti<\/b> visur pēc noklusējuma",
+    "message":"تگ های خطی <code>اسکریپت<\/code> بصورت پیشفرض در همه جا <b>غیرمجاز<\/b> هستند",
     "description":""
   },
   "popupDefault1pScriptEnabled":{
-    "message":"1st-party skripti ir <b>atļauti<\/b> visur pēc noklusējuma",
+    "message":"اسکریپت های 1st-party بصورت پیشفرض در همه جا <b>مجاز<\/b> هستند",
     "description":""
   },
   "popupDefault1pScriptDisabled":{
-    "message":"1st-party skripti ir <b>bloķēti<\/b> visur pēc noklusējuma",
+    "message":"اسکریپت های 1st-party بصورت پیشفرض در همه جا <b>غیرمجاز<\/b> هستند",
     "description":""
   },
   "popupDefault3pScriptEnabled":{
-    "message":"3rd-party skripti ir <b>atļauti<\/b> visur pēc noklusējuma",
+    "message":"اسکریپت های 3rd-party بصورت پیشفرض در همه جا <b>مجاز<\/b> هستند",
     "description":""
   },
   "popupDefault3pScriptDisabled":{
-    "message":"3rd-party skripti ir <b>bloķēti<\/b> visur pēc noklusējuma",
+    "message":"اسکریپت های 3rd-party بصورت پیشفرض در همه جا <b>غیرمجاز<\/b> هستند",
     "description":""
   },
   "popupDefault1pFrameEnabled":{
-    "message":"1st-party freimi ir <b>atļauti<\/b> visur pēc noklusējuma",
+    "message":"فریم های 1st-party بصورت پیشفرض در همه جا <b>مجاز<\/b> هستند",
     "description":""
   },
   "popupDefault1pFrameDisabled":{
-    "message":"1st-party freimi ir <b>bloķēti<\/b> visur pēc noklusējuma",
+    "message":"فریم های 1st-party بصورت پیشفرض در همه جا <b>غیرمجاز<\/b> هستند",
     "description":""
   },
   "popupDefault3pFrameEnabled":{
-    "message":"3rd-party freimi ir <b>atļauti<\/b> visur pēc noklusējuma",
+    "message":"فریم های 3rd-party بصورت پیشفرض در همه جا <b>مجاز<\/b> هستند",
     "description":""
   },
   "popupDefault3pFrameDisabled":{
-    "message":"3rd-party freimi ir <b>bloķēti<\/b> visur pēc noklusējuma",
+    "message":"فریم های 3rd-party بصورت پیشفرض در همه جا <b>غیرمجاز<\/b> هستند",
     "description":""
   },
   "popupImageRulePrompt":{
-    "message":"attēli",
+    "message":"تصاویر",
     "description":""
   },
   "popupInlineScriptRulePrompt":{
-    "message":"inline skripti",
+    "message":"اسکریپت های درون خطی",
     "description":""
   },
   "popup1pScriptRulePrompt":{
-    "message":"1st-party skripti",
+    "message":"اسکریپت های 1st-party",
     "description":""
   },
   "popup3pScriptRulePrompt":{
-    "message":"3rd-party skripti",
+    "message":"اسکریپت های 3rd-party",
     "description":""
   },
   "popup3pFrameRulePrompt":{
-    "message":"3rd-party freimi",
+    "message":"فریم های 3rd-party",
     "description":""
   },
   "popupHitDomainCountPrompt":{
-    "message":"Savienots ar {{count}} dažādiem domēniem no {{total}}",
+    "message":"متصل به {{count}} دامنه(های) متمایز از {{total}}",
     "description":"appear in dynamic filtering pane"
   },
   "pickerCreate":{
-    "message":"Izveidot",
+    "message":"ایجاد",
     "description":"English: Create"
   },
   "pickerPick":{
-    "message":"Izvēlēties",
+    "message":"انتخاب",
     "description":"English: Pick"
   },
   "pickerQuit":{
-    "message":"Iziet",
+    "message":"خروج",
     "description":"English: Quit"
   },
   "pickerNetFilters":{
-    "message":"Resursu filtri",
+    "message":"فیلترهای شبکه",
     "description":"English: Net filters"
   },
   "pickerCosmeticFilters":{
-    "message":"Vizuālie filtri",
+    "message":"فیلترهای انتخابی",
     "description":"English: Cosmetic filters"
   },
   "pickerCosmeticFiltersHint":{
-    "message":"Click, Ctrl-click",
+    "message":"کلیک، کنترل-کلیک",
     "description":"English: Click, Ctrl-click"
   },
   "pickerContextMenuEntry":{
-    "message":"Bloķēt elementu",
+    "message":"بلاک کردن این شیء",
     "description":"English: Block element"
   },
   "settingsCollapseBlockedPrompt":{
-    "message":"Paslēpt vietu no bloķētā elementa",
+    "message":"مخفی کردن نگاهدارنده اشیاء بلاک شده",
     "description":"English: Hide placeholders of blocked elements"
   },
   "settingsIconBadgePrompt":{
-    "message":"Parādīt bloķēto pieprasījumu skaitu uz ikonas",
+    "message":"نمایش تعداد درخواست های بلاک شده بر روی آیکون",
     "description":"English: Show the number of blocked requests on the icon"
   },
   "settingsContextMenuPrompt":{
-    "message":"Izmantot konteksta izvēlni vajadzības gadījumā",
+    "message":"استفاده از منوی متنی در زمانهای لازم",
     "description":"English: Make use of context menu where appropriate"
   },
   "settingsAdvancedUserPrompt":{
-    "message":"Es esmu pieredzējis lietotājs (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Advanced-user-features'>Vēlams izlasīt<\/a>)",
+    "message":"من کاربر حرفه ای هستم (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Advanced-user-features'>لازم است بخوانید<\/a>)",
     "description":"English: "
   },
   "settingsExperimentalPrompt":{
-    "message":"Iespējot eksperimentālas iespējas (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Experimental-features'>Sīkāk šeit<\/a>)",
+    "message":"فعال کردن ویژگی های آزمایشی (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Experimental-features'> درباره<\/a>)",
     "description":"English: Enable experimental features"
   },
   "3pListsOfBlockedHostsPrompt":{
-    "message":"{{netFilterCount}} tīkla filtri ＋ {{cosmeticFilterCount}} kosmētikas filtri no:",
+    "message":"{{netFilterCount}} فیلتر های شبکه ＋ {{cosmeticFilterCount}} فرم های فیلتر انتخابی:",
     "description":"English: {{netFilterCount}} network filters ＋ {{cosmeticFilterCount}} cosmetic filters from:"
   },
   "3pListsOfBlockedHostsPerListStats":{
-    "message":"{{used}} izmanto no {{total}}",
+    "message":"تعداد {{used}} از {{total}} مورد استفاده شده",
     "description":"English: {{used}} used out of {{total}}"
   },
   "3pAutoUpdatePrompt1":{
-    "message":"Automātiski atjaunināt filtra sarakstus.",
+    "message":"بروز رسانی خودکار لیست فیلتر.",
     "description":"English: Auto-update filter lists."
   },
   "3pUpdateNow":{
-    "message":"Atjaunināt tūlīt",
+    "message":"اکنون به روز رسانی شود",
     "description":"English: Update now"
   },
   "3pPurgeAll":{
-    "message":"Visas kešatmiņas iztīrīšana",
+    "message":"پاکسازی تمام انبارها",
     "description":"English: Purge all caches"
   },
   "3pParseAllABPHideFiltersPrompt1":{
-    "message":"Apstrādāt un izpildīt kosmētikas filtrus.",
+    "message":"تجزیه و اجرای فیلترهای انتخابی.",
     "description":"English: Parse and enforce Adblock+ element hiding filters."
   },
   "3pParseAllABPHideFiltersInfo":{
-    "message":"<p>Šī opcija iespējo apstrādāt un izpildīt ar <a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\"> Adblock Plus saderīgus &ldquo;elementu paslēpšanas&rdquo;<\/a> filtrus. Šie filtri ir būtībā kosmētiski, tie kalpo, lai paslēptu web lapu elementus, kas tiek uzskatīti par vizuālu traucējumu, un kas nevar būt nobloķēti ar pieprasījumu balstītu filtrēšanas programmu.<\/p><p>Šī līdzekļa iespējošana palielina <i>µBlock<\/i> izmantojamās atmiņas daudzumu.<\/p>",
+    "message":"<p>این گزینه <a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\">Adblock Plus-compatible &ldquo;element hiding&rdquo; filters<\/a> را  تجزیه و اجرا میکند. این فیلتر ها اساساً فنی هستند،  آنها اشیاء موجود در صفحه وب را که مزاحم تلقی میشوند و با موتور فیلترینگ شبکه قابل بلاک کردن نیستند را حذف میکنند.<\/p><p>فعال کردن این قابلیت مصرف حافظه ی  <i>µBlock<\/i>را افزایش میدهد.<\/p>",
     "description":"English: see English messages.json"
   },
   "3pListsOfBlockedHostsHeader":{
-    "message":"Bloķēto hostu saraksti",
+    "message":"فهرست میزبان های مسدود شده",
     "description":"English: Lists of blocked hosts"
   },
   "3pApplyChanges":{
-    "message":"Lietot izmaiņas",
+    "message":"اعمال تغییرات",
     "description":"English: Apply changes"
   },
   "3pGroupAds":{
-    "message":"Reklāmas",
+    "message":"تبلیغات",
     "description":"English: Ads"
   },
   "3pGroupPrivacy":{
-    "message":"Konfidencialitāte",
+    "message":"حریم خصوصی",
     "description":"English: Privacy"
   },
   "3pGroupMalware":{
-    "message":"Ļaundabīgo programmu domēni",
+    "message":"دامنه های مخرب",
     "description":"English: Malware domains"
   },
   "3pGroupSocial":{
-    "message":"Sociālie tīkli",
+    "message":"اجتماعی",
     "description":"English: Social"
   },
   "3pGroupMultipurpose":{
-    "message":"Daudzfunkcionālie",
+    "message":"چند منظوره",
     "description":"English: Multipurpose"
   },
   "3pGroupRegions":{
-    "message":"Reģionālie, valodas",
+    "message":"مناطق، زبانها",
     "description":"English: Regions, languages"
   },
   "3pGroupCustom":{
-    "message":"Lietotāja",
+    "message":"سفارشی",
     "description":"English: Custom"
   },
   "3pExternalListsHint":{
-    "message":"Vienu URL katrā rindiņā. Rindiņas, kura sākas ar &lsquo;!&rsquo; tiks ignorētas. Nederīgs URL bez brīdinājuma tiks ignorēts.",
+    "message":"هر آدرس در یک خط. خطوطی با پیشوند &lsquo;!&rsquo; در نظر گرفته نمیشوند. آدرس های نامعتبر نیز در سکوت نادیده گرفته میشوند.",
     "description":"English: One URL per line. Lines prefixed with &lsquo;!&rsquo; will be ignored. Invalid URLs will be silently ignored."
   },
   "3pExternalListsApply":{
-    "message":"Apstrādāt",
+    "message":"تجزیه",
     "description":"English: Parse"
   },
   "3pExternalListPurge":{
-    "message":"iztīrīt kešatmiņu",
+    "message":"پاکسازی حافظه پنهان",
     "description":"English: purge cache"
   },
   "3pExternalListNew":{
-    "message":"pieejama jauna versija",
+    "message":"نسخه جدید آماده دریافت",
     "description":"English: new version available"
   },
   "3pExternalListObsolete":{
-    "message":"novecojis",
+    "message":"منقضی شده",
     "description":"English: outdated"
   },
   "1pFormatHint":{
-    "message":"Vienu filtru katrā rindā. Filtrs var būt vienkārši resursa adrese, vai saderīgs ar Adblock Plus filtrs. Rindiņas, kuras sākas ar &lsquo;!&rsquo; tiks ignorētas.",
+    "message":"یک فیلتر در هر خط. یک فیلتر می تواند آدرس هاست ساده یا فیلتر سازگار با Adblock plus باشد. خطوط با پیشوند &lsquo;!&rsquo; نادیده گرفته می شوند.",
     "description":"English: One filter per line. A filter can be a plain hostname, or an Adblock Plus-compatible filter. Lines prefixed with &lsquo;!&rsquo; will be ignored."
   },
   "1pImport":{
-    "message":"Importēt un pievienot",
+    "message":"وارد کردن و الحاق",
     "description":"English: Import and append"
   },
   "1pExport":{
-    "message":"Eksportēt",
+    "message":"خروجي گرفتن",
     "description":"English: Export"
   },
   "1pExportFilename":{
@@ -324,27 +324,27 @@
     "description":"English: my-ublock-static-filters_{{datetime}}.txt"
   },
   "1pApplyChanges":{
-    "message":"Lietot izmaiņas",
+    "message":"اعمال تغییرات",
     "description":"English: Apply changes"
   },
   "rulesEdit":{
-    "message":"Rediģēt",
+    "message":"ویرایش",
     "description":"Will enable manual-edit mode (textarea)"
   },
   "rulesEditSave":{
-    "message":"Saglabāt",
+    "message":"ذخيره",
     "description":"Will save manually-edited content and exit manual-edit mode"
   },
   "rulesEditDiscard":{
-    "message":"Atsacīties",
+    "message":"لغو",
     "description":"Will discard manually-edited content and exit manual-edit mode"
   },
   "rulesImport":{
-    "message":"Importēt no faila...",
+    "message":"وارد کردن از فایل...",
     "description":""
   },
   "rulesExport":{
-    "message":"Eksportēt failā...",
+    "message":"خروجی گرفتن به فایل...",
     "description":""
   },
   "rulesDefaultFileName":{
@@ -352,23 +352,23 @@
     "description":"default file name to use"
   },
   "rulesHint":{
-    "message":"Dinamisko filtrēšanas noteikumu saraksts.",
+    "message":"لیست قوانین فیلترینگ پویای شما.",
     "description":"English: List of your dynamic filtering rules."
   },
   "rulesFormatHint":{
-    "message":"Noteikumu sintakse: <code>avots mērķis tips rīcība<\/code> (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Dynamic-filtering:-rule-syntax'>pilna dokumentācija<\/a>).",
+    "message":"نحوه استفاده: <code>source destination type action<\/code> (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Dynamic-filtering:-rule-syntax'>مستندات کامل<\/a>).",
     "description":"English: dynamic rule syntax and full documentation."
   },
   "whitelistPrompt":{
-    "message":"Saraksts ar interneta resursiem, kuriem tiks atspējots µBlock. Viens ieraksts katrā rindiņā. Nederīgi interneta resursu nosaukumi bez brīdinājuma tiks ignorēti.",
+    "message":"لیستی از هاست هایی که µBlock در آنها غیرفعال خواهد شد. یک مطلب در هر خط. میزبان های نامعتبر در سکوت نادیده گرفته می شوند.",
     "description":"English: Your list of host names for which µBlock will be disabled. One host name per line. Invalid host names will be silently ignored."
   },
   "whitelistImport":{
-    "message":"Importēt un pievienot",
+    "message":"وارد کردن و الحاق",
     "description":"English: Import and append"
   },
   "whitelistExport":{
-    "message":"Eksportēt",
+    "message":"خروجي گرفتن",
     "description":"English: Export"
   },
   "whitelistExportFilename":{
@@ -376,71 +376,71 @@
     "description":"English: my-ublock-whitelist_{{datetime}}.txt"
   },
   "whitelistApply":{
-    "message":"Lietot izmaiņas",
+    "message":"اعمال تغییرات",
     "description":"English: Apply changes"
   },
   "logNetRequestsPrompt":{
-    "message":"Iespējot tīkla pieprasījumu reģistrēšanu",
+    "message":"فعال کردن لاگ درخواست های شبکه",
     "description":"English: Enable the logging of network requests"
   },
   "logNetRequestsHelp":{
-    "message":"Iespējojot šo opciju, tiks pārbaudīta informācija par tīkla pieprasījumiem. Tīkla pieprasījumu reģistrēšana palielina µBlock izmantotās atmiņas apjomu. Tā kā daudzi lietotāji, nekad neizmantos šo līdzekli, tas pēc noklusējuma ir atspējots.",
+    "message":"اگر می خواهید با فعال کردن این گزینه شما می توانید جزئیات شبکه را بازرسی کنید. لاگ کردن درخواست های شبکه مصرف حافظه های µBlock را افزایش می دهد. از آنجا که بسیاری از کاربران هرگز از این ویژگی استفاده نمیکنند، به طور پیش فرض غیرفعال شده است.",
     "description":"English: see _locales\/en\/messages.log"
   },
   "logBlockedRequestsHeader":{
-    "message":"Bloķētie pieprasījumi",
+    "message":"درخواست های مسدود شده",
     "description":"English: Blocked requests"
   },
   "logAllowedRequestsHeader":{
-    "message":"Atļautie pieprasījumi",
+    "message":"درخواست های مجاز",
     "description":"English: Allowed requests"
   },
   "logRequestsHeaderType":{
-    "message":"Tips",
+    "message":"نوع",
     "description":"English: Type"
   },
   "logRequestsHeaderDomain":{
-    "message":"Domēns",
+    "message":"دامنه",
     "description":"English: Domain"
   },
   "logRequestsHeaderURL":{
-    "message":"URL",
+    "message":"آدرس",
     "description":"English: URL"
   },
   "logRequestsHeaderFilter":{
-    "message":"Filtrs",
+    "message":"فیلتر",
     "description":"English: Filter"
   },
   "logBlockedRequestsEmpty":{
-    "message":"Šai lapai nav reģistrēti bloķētie pieprasījumi",
+    "message":"هیچ درخواست مسدود شده ای برای این صفحه ثبت نشده",
     "description":"English: No blocked requests logged for this page"
   },
   "logAllowedRequestsEmpty":{
-    "message":"Šai lapai nav reģistrēti nebloķētie pieprasījumi",
+    "message":"هیچ درخواست غیر-مسدود کننده ای برای این صفحه ثبت نشده",
     "description":"English: No non-blocked requests logged for this page"
   },
   "logBehindTheScene":{
-    "message":"Aizkulisēs",
+    "message":"پشت صحنه",
     "description":"Pretty name for behind-the-scene network requests"
   },
   "aboutChangelog":{
-    "message":"Izmaiņu žurnāls",
+    "message":"تغییرات اخیر",
     "description":"English: Change log"
   },
   "aboutWiki":{
-    "message":"Wiki",
+    "message":"ویکی",
     "description":"English: project' wiki on Github"
   },
   "aboutCode":{
-    "message":"Pirmkods (GPLv3)",
+    "message":"سورس کد  (GPLv3)",
     "description":"English: Source code (GPLv3)"
   },
   "aboutContributors":{
-    "message":"Atbalstītāji",
+    "message":"مشارکت کنندگان",
     "description":"English: Contributors"
   },
   "aboutBackupDataButton":{
-    "message":"Saglabāt iestatījumus failā",
+    "message":"پشتیبان گیری در فایل",
     "description":"English: Backup to file"
   },
   "aboutBackupFilename":{
@@ -448,31 +448,31 @@
     "description":"English: my-ublock-backup_{{datetime}}.txt"
   },
   "aboutRestoreDataButton":{
-    "message":"Atjaunot iestatījumus no faila...",
+    "message":"بازیابی از فایل...",
     "description":"English: Restore from file..."
   },
   "aboutResetDataButton":{
-    "message":"Iestatīt noklusējuma iestatījumus...",
+    "message":"تنظیم مجدد تنظیمات پیش فرض...",
     "description":"English: Reset to default settings..."
   },
   "aboutRestoreDataConfirm":{
-    "message":"Tiks pārrakstīti visi iestatījumi izmantojot datus, kas balstās uz {{time}}, un µBlock tiks restartēts.  Pārrakstīt visus esošos iestatījumus, izmantojot rezerves kopiju?",
+    "message":"تمام تنظیمات با استفاده از پشتیبان گیری در {{time}}،  رونویسی شده و µBlock مجدد راه اندازی میشود.\n\nتمام تنظیمات موجود با استفاده از داده های پشتیبانی رونویسی شود؟",
     "description":"Message asking user to confirm restore"
   },
   "aboutRestoreDataError":{
-    "message":"Datus nevar nolasīt vai tie nav derīgi",
+    "message":"داده ها نمی تواند خوانده شوند و یا نامعتبر اند",
     "description":"Message to display when an error occurred during restore"
   },
   "aboutResetDataConfirm":{
-    "message":"Tiks atcelti visi Jūsu iestatījumi, un µBlock tiks restartēts. Atjaunot rūpnīcas iestatījumus?",
+    "message":"تمام تنظیمات شده حذف و µBlock دوباره راه اندازی خواهد شد.\n\nتنظیم مجدد µBlock به تنظیمات کارخانه؟",
     "description":"Message asking user to confirm reset"
   },
   "errorCantConnectTo":{
-    "message":"Nevar izveidot savienojumu ar {{url}}",
+    "message":"قادر به اتصال به {{url}}",
     "description":"English: Network error: unable to connect to {{url}}"
   },
   "dummy":{
-    "message":"Šim ierakstam ir jābūt pēdējam",
+    "message":"This entry must be the last one",
     "description":"so we dont need to deal with comma for last entry"
   }
 }

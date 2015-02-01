@@ -10,6 +10,7 @@ unzip -q ~/Downloads/ublock.zip -d $SRC
 
 DES=./src/_locales
 cp $SRC/ar/messages.json    $DES/ar/messages.json
+cp $SRC/bg/messages.json    $DES/bg/messages.json
 cp $SRC/ca/messages.json    $DES/ca/messages.json
 cp $SRC/cs/messages.json    $DES/cs/messages.json
 cp $SRC/da/messages.json    $DES/da/messages.json
@@ -17,6 +18,7 @@ cp $SRC/de/messages.json    $DES/de/messages.json
 cp $SRC/el/messages.json    $DES/el/messages.json
 cp $SRC/es-ES/messages.json $DES/es/messages.json
 cp $SRC/et/messages.json    $DES/et/messages.json
+cp $SRC/fa/messages.json    $DES/fa/messages.json
 cp $SRC/fi/messages.json    $DES/fi/messages.json
 cp $SRC/fil/messages.json   $DES/fil/messages.json
 cp $SRC/fr/messages.json    $DES/fr/messages.json
@@ -27,6 +29,7 @@ cp $SRC/hu/messages.json    $DES/hu/messages.json
 cp $SRC/id/messages.json    $DES/id/messages.json
 cp $SRC/it/messages.json    $DES/it/messages.json
 cp $SRC/ja/messages.json    $DES/ja/messages.json
+cp $SRC/ko/messages.json    $DES/ko/messages.json
 cp $SRC/lv/messages.json    $DES/lv/messages.json
 cp $SRC/mr/messages.json    $DES/mr/messages.json
 cp $SRC/no/messages.json    $DES/nb/messages.json
@@ -47,13 +50,15 @@ cp $SRC/zh-TW/messages.json $DES/zh_TW/messages.json
 
 DES=./dist/description
 cp $SRC/ar/description.txt    $DES/description-ar.txt
+cp $SRC/bg/description.txt    $DES/description-bg.txt
 cp $SRC/ca/description.txt    $DES/description-ca.txt
 cp $SRC/cs/description.txt    $DES/description-cs.txt
 cp $SRC/da/description.txt    $DES/description-da.txt
 cp $SRC/de/description.txt    $DES/description-de.txt
-#cp $SRC/el/description.txt    $DES/description-el.txt
+cp $SRC/el/description.txt    $DES/description-el.txt
 cp $SRC/es-ES/description.txt $DES/description-es.txt
 cp $SRC/et/description.txt    $DES/description-et.txt
+cp $SRC/fa/description.txt    $DES/description-fa.txt
 cp $SRC/fi/description.txt    $DES/description-fi.txt
 cp $SRC/fil/description.txt   $DES/description-fil.txt
 cp $SRC/fr/description.txt    $DES/description-fr.txt
@@ -63,7 +68,9 @@ cp $SRC/hu/description.txt    $DES/description-hu.txt
 cp $SRC/id/description.txt    $DES/description-id.txt
 cp $SRC/it/description.txt    $DES/description-it.txt
 cp $SRC/ja/description.txt    $DES/description-ja.txt
+cp $SRC/ko/description.txt    $DES/description-ko.txt
 cp $SRC/lv/description.txt    $DES/description-lv.txt
+#cp $SRC/mr/description.txt $DES/description-mr.txt
 cp $SRC/no/description.txt    $DES/description-no.txt
 cp $SRC/nl/description.txt    $DES/description-nl.txt
 cp $SRC/pl/description.txt    $DES/description-pl.txt

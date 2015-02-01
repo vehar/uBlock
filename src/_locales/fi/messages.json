@@ -4,7 +4,7 @@
     "description":"extension name."
   },
   "extShortDesc":{
-    "message":"Viimein, tehokas mainosten estäjä Chromium selaimille, jolla on alhainen resurssien kulutus.",
+    "message":"Viimeinkin tehokas ja kevyt mainosten estäjä.",
     "description":"this will be in the chrome web store: must be 132 characters or less"
   },
   "dashboardName":{
@@ -20,7 +20,7 @@
     "description":"appears as tab name in dashboard"
   },
   "1pPageName":{
-    "message":"Sinun suodattimet",
+    "message":"Minun suodattimet",
     "description":"appears as tab name in dashboard"
   },
   "rulesPageName":{
@@ -28,11 +28,11 @@
     "description":"appears as tab name in dashboard"
   },
   "whitelistPageName":{
-    "message":"Ei-blokatut",
+    "message":"Valkolista",
     "description":"appears as tab name in dashboard"
   },
   "statsPageName":{
-    "message":"µBlock — Network request log",
+    "message":"µBlock — Verkkopyyntöjen loki",
     "description":"Title for the network request log window"
   },
   "aboutPageName":{
@@ -52,7 +52,7 @@
     "description":"English: on this page"
   },
   "popupBlockedSinceInstallPrompt":{
-    "message":"asennusen jälkeen",
+    "message":"asennuksen jälkeen",
     "description":"English: since install"
   },
   "popupOr":{
@@ -72,103 +72,103 @@
     "description":"English: Go to request log"
   },
   "popupSiteInlineScriptEnabled":{
-    "message":"<code>skripti<\/code> tagit ovat <b>sallittuja<\/b> tällä sivustolla",
+    "message":"Upotetut <code>skripti<\/code>tagit ovat <b>sallittuja<\/b> tällä sivustolla",
     "description":""
   },
   "popupSiteInlineScriptDisabled":{
-    "message":"<code>skripti<\/code> tagit ovat <b>estettyjä<\/b> tällä sivustolla",
+    "message":"Upotetut <code>skripti<\/code> tagit ovat <b>estettyjä<\/b> tällä sivustolla",
     "description":""
   },
   "popupSite1pScriptEnabled":{
-    "message":"1st-party scripts are <b>allowed<\/b> on this site",
+    "message":"1:sen osapuolen skriptit ovat <b>sallittuja<\/b> tällä sivulla",
     "description":""
   },
   "popupSite1pScriptDisabled":{
-    "message":"1st-party scripts are <b>blocked<\/b> on this site",
+    "message":"1:sen osapuolen skriptit ovat <b>estettyjä<\/b> tällä sivulla",
     "description":""
   },
   "popupSite3pScriptEnabled":{
-    "message":"3rd-party scripts are <b>allowed<\/b> on this site",
+    "message":"3:nen osapuolen skriptit ovat <b>sallittuja<\/b> tällä sivulla",
     "description":""
   },
   "popupSite3pScriptDisabled":{
-    "message":"3rd-party scripts are <b>blocked<\/b> on this site",
+    "message":"3:nen osapuolen skriptit ovat <b>estettyjä<\/b> tällä sivulla",
     "description":""
   },
   "popupSite1pFrameEnabled":{
-    "message":"1st-party frames are <b>allowed<\/b> on this site",
+    "message":"1:sen osapuolen kehykset ovat <b>sallittuja<\/b> tällä sivulla",
     "description":""
   },
   "popupSite1pFrameDisabled":{
-    "message":"1st-party frames are <b>blocked<\/b> on this site",
+    "message":"1:sen osapuolen kehykset ovat <b>estettyjä<\/b> tällä sivulla",
     "description":""
   },
   "popupSite3pFrameEnabled":{
-    "message":"3rd-party frames are <b>allowed<\/b> on this site",
+    "message":"3:nen osapuolen kehykset ovat <b>sallittuja<\/b> tällä sivulla",
     "description":""
   },
   "popupSite3pFrameDisabled":{
-    "message":"3rd-party frames are <b>blocked<\/b> on this site",
+    "message":"3:nen osapuolen kehykset ovat <b>estettyjä<\/b> tällä sivulla",
     "description":""
   },
   "popupDefaultInlineScriptEnabled":{
-    "message":"Inline <code>script<\/code> tags are <b>allowed<\/b> everywhere by default",
+    "message":"Upotetut <code>skripti<\/code> tagit ovat<b>sallittuja<\/b> kaikkialla oletuksena",
     "description":""
   },
   "popupDefaultInlineScriptDisabled":{
-    "message":"Inline <code>script<\/code> tags are <b>blocked<\/b> everywhere by default",
+    "message":"Upotetut <code>skripti<\/code> tagit ovat<b>estettyjä<\/b> kaikkialla oletuksena",
     "description":""
   },
   "popupDefault1pScriptEnabled":{
-    "message":"1st-party scripts are <b>allowed<\/b> everywhere by default",
+    "message":"1:sen osapuolen skriptit ovat <b>sallittuja<\/b> kaikkialla oletuksena",
     "description":""
   },
   "popupDefault1pScriptDisabled":{
-    "message":"1st-party scripts are <b>blocked<\/b> everywhere by default",
+    "message":"1:sen osapuolen skriptit ovat <b>estettyjä<\/b> kaikkialla oletuksena",
     "description":""
   },
   "popupDefault3pScriptEnabled":{
-    "message":"3rd-party scripts are <b>allowed<\/b> everywhere by default",
+    "message":"3:nen osapuolen skriptit ovat <b>sallittuja<\/b> kaikkialla oletuksena",
     "description":""
   },
   "popupDefault3pScriptDisabled":{
-    "message":"3rd-party scripts are <b>blocked<\/b> everywhere by default",
+    "message":"3:nen osapuolen skriptit ovat <b>estettyjä<\/b> kaikkialla oletuksena",
     "description":""
   },
   "popupDefault1pFrameEnabled":{
-    "message":"1st-party frames are <b>allowed<\/b> everywhere by default",
+    "message":"1:sen osapuolen kehykset ovat <b>sallittuja<\/b> kaikkialla oletuksena",
     "description":""
   },
   "popupDefault1pFrameDisabled":{
-    "message":"1st-party frames are <b>blocked<\/b> everywhere by default",
+    "message":"1:sen osapuolen kehykset ovat <b>estettyjä<\/b> kaikkialla oletuksena",
     "description":""
   },
   "popupDefault3pFrameEnabled":{
-    "message":"3rd-party frames are <b>allowed<\/b> everywhere by default",
+    "message":"3:nen osapuolen kehykset ovat <b>sallittuja<\/b> kaikkialla oletuksena",
     "description":""
   },
   "popupDefault3pFrameDisabled":{
-    "message":"3rd-party frames are <b>blocked<\/b> everywhere by default",
+    "message":"3:nen osapuolen kehykset ovat <b>estettyjä<\/b> kaikkialla oletuksena",
     "description":""
   },
   "popupImageRulePrompt":{
-    "message":"images",
+    "message":"kuvat",
     "description":""
   },
   "popupInlineScriptRulePrompt":{
-    "message":"inline scripts",
+    "message":"upotetut skriptit",
     "description":""
   },
   "popup1pScriptRulePrompt":{
-    "message":"1st-party scripts",
+    "message":"1:sen osapuolen skriptit",
     "description":""
   },
   "popup3pScriptRulePrompt":{
-    "message":"3rd-party scripts",
+    "message":"3. osapuolen skriptit",
     "description":""
   },
   "popup3pFrameRulePrompt":{
-    "message":"3rd-party frames",
+    "message":"3:nen osapuolen kehykset",
     "description":""
   },
   "popupHitDomainCountPrompt":{
@@ -196,7 +196,7 @@
     "description":"English: Cosmetic filters"
   },
   "pickerCosmeticFiltersHint":{
-    "message":"Click, Ctrl-click",
+    "message":"Painallus, Ctrl-painallus",
     "description":"English: Click, Ctrl-click"
   },
   "pickerContextMenuEntry":{
@@ -212,15 +212,15 @@
     "description":"English: Show the number of blocked requests on the icon"
   },
   "settingsContextMenuPrompt":{
-    "message":"Make use of context menu where appropriate",
+    "message":"Käytä sisältövalikkoa, kun mahdollista",
     "description":"English: Make use of context menu where appropriate"
   },
   "settingsAdvancedUserPrompt":{
-    "message":"I am an advanced user (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Advanced-user-features'>Required reading<\/a>)",
+    "message":"Olen edistynyt käyttäjä (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Advanced-user-features'>Lue tämä<\/a>)",
     "description":"English: "
   },
   "settingsExperimentalPrompt":{
-    "message":"Enable experimental features (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Experimental-features'>About<\/a>)",
+    "message":"Salli kokeilulliset toiminnot (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Experimental-features'>Tietoa<\/a>)",
     "description":"English: Enable experimental features"
   },
   "3pListsOfBlockedHostsPrompt":{
@@ -228,7 +228,7 @@
     "description":"English: {{netFilterCount}} network filters ＋ {{cosmeticFilterCount}} cosmetic filters from:"
   },
   "3pListsOfBlockedHostsPerListStats":{
-    "message":"{{used}} used out of {{total}}",
+    "message":"käytetty {{used}}\/{{total}}",
     "description":"English: {{used}} used out of {{total}}"
   },
   "3pAutoUpdatePrompt1":{
@@ -252,7 +252,7 @@
     "description":"English: see English messages.json"
   },
   "3pListsOfBlockedHostsHeader":{
-    "message":"Lista blokatuista isännistä",
+    "message":"Lista estetyistä isännistä",
     "description":"English: Lists of blocked hosts"
   },
   "3pApplyChanges":{
@@ -284,7 +284,7 @@
     "description":"English: Regions, languages"
   },
   "3pGroupCustom":{
-    "message":"Custom",
+    "message":"Mukautettu",
     "description":"English: Custom"
   },
   "3pExternalListsHint":{
@@ -352,7 +352,7 @@
     "description":"default file name to use"
   },
   "rulesHint":{
-    "message":"List of your dynamic filtering rules.",
+    "message":"Lista dynaamisista suodatussäännöistäsi.",
     "description":"English: List of your dynamic filtering rules."
   },
   "rulesFormatHint":{
@@ -372,7 +372,7 @@
     "description":"English: Export"
   },
   "whitelistExportFilename":{
-    "message":"ublock-sallitut_{{datetime}}.txt",
+    "message":"minun-ublock-valkolista_{{datetime}}.txt",
     "description":"English: my-ublock-whitelist_{{datetime}}.txt"
   },
   "whitelistApply":{
@@ -400,11 +400,11 @@
     "description":"English: Type"
   },
   "logRequestsHeaderDomain":{
-    "message":"Domain",
+    "message":"Verkkotunnus",
     "description":"English: Domain"
   },
   "logRequestsHeaderURL":{
-    "message":"URL",
+    "message":"URL-Osoite",
     "description":"English: URL"
   },
   "logRequestsHeaderFilter":{
@@ -412,11 +412,11 @@
     "description":"English: Filter"
   },
   "logBlockedRequestsEmpty":{
-    "message":"No blocked requests logged for this page",
+    "message":"Ei estettyjä pyyntöjä havaittu tällä sivulla",
     "description":"English: No blocked requests logged for this page"
   },
   "logAllowedRequestsEmpty":{
-    "message":"No non-blocked requests logged for this page",
+    "message":"Ei ei-estettyjä pyyntöjä havaittu tällä sivulla",
     "description":"English: No non-blocked requests logged for this page"
   },
   "logBehindTheScene":{
@@ -424,7 +424,7 @@
     "description":"Pretty name for behind-the-scene network requests"
   },
   "aboutChangelog":{
-    "message":"Change log",
+    "message":"Muutosloki",
     "description":"English: Change log"
   },
   "aboutWiki":{
@@ -432,7 +432,7 @@
     "description":"English: project' wiki on Github"
   },
   "aboutCode":{
-    "message":"Source code (GPLv3)",
+    "message":"Lähdekoodi (GPLv3)",
     "description":"English: Source code (GPLv3)"
   },
   "aboutContributors":{
@@ -440,11 +440,11 @@
     "description":"English: Contributors"
   },
   "aboutBackupDataButton":{
-    "message":"Backup to file",
+    "message":"Varmuuskopioi tiedostoon",
     "description":"English: Backup to file"
   },
   "aboutBackupFilename":{
-    "message":"my-ublock-backup_{{datetime}}.txt",
+    "message":"minun-ublock-varmuuskopio_{{datetime}}.txt",
     "description":"English: my-ublock-backup_{{datetime}}.txt"
   },
   "aboutRestoreDataButton":{
@@ -456,11 +456,11 @@
     "description":"English: Reset to default settings..."
   },
   "aboutRestoreDataConfirm":{
-    "message":"All your settings will be overwritten using data backed up on {{time}}, and µBlock will restart.\n\nOverwrite all existing settings using backed up data?",
+    "message":"Kaikki asetuksesi korvataan käyttäen tietoja, jotka on varmuuskopioitu {{time}} ja µBlock käynnistyy uudelleen.\nPäällekirjoitetaanko kaikki nykyiset asetukset käyttäen varmuuskopioituja tietoja?",
     "description":"Message asking user to confirm restore"
   },
   "aboutRestoreDataError":{
-    "message":"The data could not be read or is invalid",
+    "message":"Tietoa ei voitu lukea, tai se on viallista",
     "description":"Message to display when an error occurred during restore"
   },
   "aboutResetDataConfirm":{

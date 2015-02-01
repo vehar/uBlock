@@ -4,7 +4,7 @@
     "description":"extension name."
   },
   "extShortDesc":{
-    "message":"Por fin, un bloqueador eficiente con uso ligero de procesador y memoria.",
+    "message":"Por fin, un bloqueador eficiente con uso mínimo de procesador y memoria.",
     "description":"this will be in the chrome web store: must be 132 characters or less"
   },
   "dashboardName":{
@@ -436,7 +436,7 @@
     "description":"English: Source code (GPLv3)"
   },
   "aboutContributors":{
-    "message":"Contribuidores",
+    "message":"Colaboradores",
     "description":"English: Contributors"
   },
   "aboutBackupDataButton":{
