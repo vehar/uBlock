@@ -151,8 +151,16 @@
     "message":"Tredjeparts iframe-koder <b>blokkeres<\/b> overalt som standard",
     "description":""
   },
+  "popupAnyRulePrompt":{
+    "message":"alle",
+    "description":""
+  },
   "popupImageRulePrompt":{
     "message":"bilder",
+    "description":""
+  },
+  "popup3pAnyRulePrompt":{
+    "message":"tredjepart",
     "description":""
   },
   "popupInlineScriptRulePrompt":{
@@ -172,8 +180,12 @@
     "description":""
   },
   "popupHitDomainCountPrompt":{
-    "message":"Koblet til {{count}} distinkt(e) domene(r) av {{total}}",
-    "description":"appear in dynamic filtering pane"
+    "message":"domener tilkoblet",
+    "description":"appears in popup"
+  },
+  "popupHitDomainCount":{
+    "message":"{{count}} av {{total}}",
+    "description":"appears in popup"
   },
   "pickerCreate":{
     "message":"Opprett",

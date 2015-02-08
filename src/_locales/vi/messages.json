@@ -151,8 +151,16 @@
     "message":"Các khung bên thứ ba <b>không được cho phép<\/b> ở mọi nơi theo mặc định",
     "description":""
   },
+  "popupAnyRulePrompt":{
+    "message":"tất cả",
+    "description":""
+  },
   "popupImageRulePrompt":{
     "message":"hình ảnh",
+    "description":""
+  },
+  "popup3pAnyRulePrompt":{
+    "message":"bên thứ ba",
     "description":""
   },
   "popupInlineScriptRulePrompt":{
@@ -172,8 +180,12 @@
     "description":""
   },
   "popupHitDomainCountPrompt":{
-    "message":"Đã kết nối đến {{count}} tên miền riêng biệt trên tổng số {{total}}",
-    "description":"appear in dynamic filtering pane"
+    "message":"tên miền",
+    "description":"appears in popup"
+  },
+  "popupHitDomainCount":{
+    "message":"{{count}} trên tổng {{total}}",
+    "description":"appears in popup"
   },
   "pickerCreate":{
     "message":"Tạo",

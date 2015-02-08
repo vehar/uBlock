@@ -16,7 +16,7 @@
     "description":"appears as tab name in dashboard"
   },
   "3pPageName":{
-    "message":"サードパーティ製フィルター",
+    "message":"外部フィルター",
     "description":"appears as tab name in dashboard"
   },
   "1pPageName":{
@@ -56,7 +56,7 @@
     "description":"English: since install"
   },
   "popupOr":{
-    "message":"又は",
+    "message":"or",
     "description":"English: or"
   },
   "popupTipDashboard":{
@@ -151,8 +151,16 @@
     "message":"3rd-party frames are <b>blocked<\/b> everywhere by default",
     "description":""
   },
+  "popupAnyRulePrompt":{
+    "message":"all",
+    "description":""
+  },
   "popupImageRulePrompt":{
     "message":"images",
+    "description":""
+  },
+  "popup3pAnyRulePrompt":{
+    "message":"3rd-party",
     "description":""
   },
   "popupInlineScriptRulePrompt":{
@@ -172,8 +180,12 @@
     "description":""
   },
   "popupHitDomainCountPrompt":{
-    "message":"Connected to {{count}} distinct domain(s) out of {{total}}",
-    "description":"appear in dynamic filtering pane"
+    "message":"接続したドメイン",
+    "description":"appears in popup"
+  },
+  "popupHitDomainCount":{
+    "message":"{{count}} \/ {{total}}",
+    "description":"appears in popup"
   },
   "pickerCreate":{
     "message":"作成",
@@ -448,7 +460,7 @@
     "description":"English: my-ublock-backup_{{datetime}}.txt"
   },
   "aboutRestoreDataButton":{
-    "message":"ファイルからの復元...",
+    "message":"ファイルから復元...",
     "description":"English: Restore from file..."
   },
   "aboutResetDataButton":{

@@ -8,6 +8,7 @@
   * [Memory](#memory)
   * [CPU](#cpu)
   * [Blocking](#blocking)
+  * [Quick tests](#quick-tests)
 * [Installation](#installation)
   * [Chromium](#chromium)
   * [Firefox](#firefox)
@@ -31,13 +32,23 @@ _EasyList_, _Peter Lowe's Adservers_, _EasyPrivacy_ are enabled by default when 
 
 #### Memory
 
-<p align="center">
-On average, µBlock <b>really</b> does make your browser run leaner<br>
-<img src="https://raw.githubusercontent.com/gorhill/uBlock/master/doc/benchmarks/mem-usage-overall-chart-20141224.png" /><br>
-<sup>Details of the benchmark available in <a href="https://github.com/gorhill/uBlock/blob/master/doc/benchmarks/mem-usage-overall-20141224.ods">this LibreOffice spreadsheet</a>.</sup>
-</p>
+<div align="center">
+On average, µBlock <b>really</b> does make your browser run leaner. <sup>[1]</sup><br><br>
 
-<sup>**Important note regarding memory usage:** There is currently a [bug in Chromium 39+ which causes a new memory leak each time the popup UI of an extension is opened](https://code.google.com/p/chromium/issues/detail?id=441500). This affects *all* extensions. Keep this in mind when measuring Chromium's memory usage. In the benchmarks, I avoided opening the popups completely.</sup>
+Chromium <sup>[2]</sup><br>
+<img src="https://raw.githubusercontent.com/gorhill/uBlock/master/doc/benchmarks/mem-usage-overall-chart-20141224.png" /><br><br>
+
+Firefox<br>
+<img src="https://raw.githubusercontent.com/gorhill/uBlock/master/doc/benchmarks/mem-usage-overall-chart-20150205.png" /><br><br>
+
+Safari<br>
+<img src="https://raw.githubusercontent.com/gorhill/uBlock/master/doc/benchmarks/mem-usage-overall-chart-safari-20150205.png" /><br><br>
+
+</div>
+
+<sup>[1] Details of the benchmark available at <a href="https://github.com/gorhill/uBlock/wiki/Firefox-version:-benchmarking-memory-footprint">Firefox version: benchmarking memory footprint</a>.</sup><br>
+
+<sup>[2] Important note: There is currently a [bug in Chromium 39+ which causes a new memory leak each time the popup UI of an extension is opened](https://code.google.com/p/chromium/issues/detail?id=441500). This affects <i>all</i> extensions. Keep this in mind when measuring Chromium's memory usage. In the benchmarks, I avoided opening the popups completely.</sup><br>
 
 #### CPU
 
@@ -56,6 +67,12 @@ Being lean and efficient doesn't mean blocking less<br>
 <a href="https://github.com/gorhill/uBlock/wiki/%C2%B5Block-and-others:-Blocking-ads,-trackers,-malwares">µBlock and others: Blocking ads, trackers, malwares</a>.
 </p>
 
+#### Quick tests
+
+- [Index](http://raymondhill.net/ublock/tests.html)
+- [Web page components](http://raymondhill.net/ublock/tiles1.html)
+- [Popups](http://raymondhill.net/ublock/popup.html)
+
 ## Installation
 
 Feel free to read [about the extension's required permissions](https://github.com/gorhill/uBlock/wiki/About-the-required-permissions).
@@ -66,13 +83,13 @@ You can install the latest version [manually](https://github.com/gorhill/uBlock/
 
 #### Firefox
 
-You can install by dragging the latest [uBlock.firefox.xpi](https://github.com/gorhill/uBlock/releases) file to your add-on page.
+You can install by downloading the latest [uBlock.firefox.xpi](https://github.com/gorhill/uBlock/releases) file, and by dragging the downloaded `xpi` file to your add-on page.
 
 #### Safari
 
 You can get µBlock for Safari (Yosemite's 8.0 or newer) from the [Safari Extension Gallery](https://extensions.apple.com/details/?id=net.gorhill.uBlock-96G4BAKDQ9).
 
-<sup>There are currently no plans to support older Safari's. It's not recommended that you install µBlock on them (*do it at your own risk*).</sup>
+<sup>There are currently no plans to support older versions of Safari. It's not recommended that you install µBlock on them (*do it at your own risk*).</sup>
 
 #### Note for all browsers
 
@@ -84,13 +101,9 @@ See the [releases pages](https://github.com/gorhill/uBlock/releases) for a histo
 
 ## Documentation
 
-µBlock's functionality is self-explanatory and intuitive for the most part. One thing to note after you get started is the big power button in µBlock's popup:
+[Quick guide: popup user interface](https://github.com/gorhill/uBlock/wiki/Quick-guide:-popup-user-interface)
 
 ![Popup](https://raw.githubusercontent.com/gorhill/uBlock/master/doc/img/popup-1.png)
-
-The big power button is to disable/enable µBlock for the specific current site/hostname (as extracted from the URL of the current page).
-
-**In other words, it applies to the current site only; it is *not* a global power button.** The state of the power switch for a specific site will be remembered. 
 
 For advanced usage, read about [dynamic filtering](https://github.com/gorhill/uBlock/wiki/Dynamic-filtering:-quick-guide) and more on [µBlock's wiki](https://github.com/gorhill/uBlock/wiki).
 

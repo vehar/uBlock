@@ -163,7 +163,7 @@
     if(frameId === 0) {
         safari.self.tab.canLoad(beforeLoadEvent, {
             url: location.href,
-            type: "navigatedToNew"
+            type: "main_frame"
         });
     }
     var nodeTypes = {
@@ -189,9 +189,8 @@
             return;
         }
         linkHelper.href = e.url;
-        var url = linkHelper.href;
         var details = {
-            url: url,
+            url: linkHelper.href,
             type: nodeTypes[e.target.nodeName.toLowerCase()] || "other",
             // tabId is determined in the background script
             frameId: frameId,
@@ -205,12 +204,12 @@
     };
     document.addEventListener("beforeload", onBeforeLoad, true);
 
-    // Block popups, intercept XHRs, and add site patches
+    // Block popups, intercept XHRs
     var firstMutation = function() {
         document.removeEventListener("DOMContentLoaded", firstMutation, true);
         firstMutation = false;
         var randEventName = uniqueId();
-        window.addEventListener(randEventName, function(e) {
+        document.addEventListener(randEventName, function(e) {
             if(shouldBlockDetailedRequest(e.detail)) {
                 e.detail.url = false;
             }
@@ -226,16 +225,18 @@ type: t\
 },\
 bubbles: false\
 });\
-dispatchEvent(e);\
+document.dispatchEvent(e);\
 return e.detail.url === false;\
 },\
 wo = open,\
-xo = XMLHttpRequest.prototype.open;\
+xo = XMLHttpRequest.prototype.open,\
+_noOP = function(){};\
 open = function(u) {\
 return block(u, 'popup') ? null : wo.apply(this, arguments);\
 };\
 XMLHttpRequest.prototype.open = function(m, u, s) {\
-return xo.apply(this, block(u, 'xmlhttprequest') ? ['HEAD', u, s] : arguments);\
+if(block(u, 'xmlhttprequest')) return {send: _noOP};\
+else return xo.apply(this, arguments);\
 };";
         if(frameId === 0) {
             tmpScript += "\
@@ -257,13 +258,6 @@ var r = rS.apply(this, arguments);\
 onpopstate();\
 return r;\
 };";
-        }
-        var whiteListed = safari.self.tab.canLoad(beforeLoadEvent, {
-            type: "isWhiteListed",
-            url: location.href
-        });
-        if(vAPI.sitePatch && !whiteListed) {
-            tmpScript += "(" + vAPI.sitePatch + ")();";
         }
         tmpScript += "})();";
         tmpJS.textContent = tmpScript;

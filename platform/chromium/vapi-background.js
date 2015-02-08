@@ -386,6 +386,8 @@ vAPI.messaging.broadcast = function(message) {
 // "the dreaded 'uniformly slow code' case where every function takes 1% 
 //  of CPU and you have to make one hundred separate performance optimizations 
 //  to improve performance at all"
+//
+// http://jsperf.com/closure-no-closure/2
 
 var CallbackWrapper = function(port, request) {
     // No need to bind every single time
@@ -475,6 +477,12 @@ vAPI.net.registerListeners = function() {
     };
     chrome.webRequest.onBeforeRequest.addListener(
         onBeforeRequest,
+        //function(details) {
+        //    quickProfiler.start('onBeforeRequest');
+        //    var r = onBeforeRequest(details);
+        //    quickProfiler.stop();
+        //    return r;
+        //},
         {
             'urls': this.onBeforeRequest.urls || ['<all_urls>'],
             'types': this.onBeforeRequest.types || []

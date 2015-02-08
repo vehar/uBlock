@@ -33,7 +33,7 @@ var popupData;
 var dfPaneBuilt = false;
 var popupHeight;
 var reIP = /^\d+(?:\.\d+){1,3}$/;
-var reSrcHostnameFromRule = /^d[abn]:([^ ]+) ([^ ]+)/;
+var reSrcHostnameFromRule = /^d[abn]:([^ ]+) ([^ ]+) ([^ ]+)/;
 var scopeToSrcHostnameMap = {
     '/': '*',
     '.': ''
@@ -45,9 +45,12 @@ var dfHotspots = null;
 var hostnameToSortableTokenMap = {};
 var allDomains = {};
 var allDomainCount = 0;
+var allHostnameRows = [];
 var touchedDomainCount = 0;
 var rowsToRecycle = uDom();
 var cachedPopupHash = '';
+var orStr = vAPI.i18n('popupOr');
+var domainsHitStr = vAPI.i18n('popupHitDomainCount');
 
 /******************************************************************************/
 
@@ -152,19 +155,6 @@ var addDynamicFilterRow = function(des) {
     row.toggleClass('isDomain', des === hnDetails.domain);
     row.toggleClass('allowed', hnDetails.allowCount !== 0);
     row.toggleClass('blocked', hnDetails.blockCount !== 0);
-
-    if ( allDomains.hasOwnProperty(hnDetails.domain) === false ) {
-        allDomains[hnDetails.domain] = false;
-        allDomainCount += 1;
-    }
-
-    if ( hnDetails.allowCount !== 0 ) {
-        if ( allDomains[hnDetails.domain] === false ) {
-            allDomains[hnDetails.domain] = true;
-            touchedDomainCount += 1;
-        }
-    }
-
     row.appendTo('#dynamicFilteringContainer');
 
     // Hacky? I couldn't figure a CSS recipe for this problem.
@@ -200,32 +190,42 @@ var updateDynamicFilterCell = function(scope, des, type, rule) {
     var ownRule = false;
     var matches = reSrcHostnameFromRule.exec(rule);
     if ( matches !== null ) {
-        ownRule =  matches[2] === des &&
-                   matches[1] === scopeToSrcHostnameMap[scope];
+        ownRule = (matches[2] !== '*' || matches[3] === type) &&
+                  (matches[2] === des) &&
+                  (matches[1] === scopeToSrcHostnameMap[scope]);
     }
     cell.toggleClass('ownRule', ownRule);
 
-    if ( scope !== '.' || type !== '*' ) {
+    if ( scope !== '.' || des === '*' ) {
         return;
     }
+
+    // IMPORTANT: It is completely assumed the first node is a TEXT_NODE, so
+    //            ensure this in the HTML file counterpart when you make
+    //            changes
+    var textNode = cell.nodeAt(0).firstChild;
+
+    // Remember this may be a cell from a reused row, we need to clear text
+    // content if we can't compute request counts.
     if ( popupData.hostnameDict.hasOwnProperty(des) === false ) {
+        textNode.nodeValue = ' ';
         return;
     }
+
     var hnDetails = popupData.hostnameDict[des];
     var aCount = hnDetails.allowCount;
     var bCount = hnDetails.blockCount;
     if ( aCount === 0 && bCount === 0 ) {
+        textNode.nodeValue = ' ';
         return;
     }
+
     // https://github.com/gorhill/uBlock/issues/471
     aCount = Math.min(Math.ceil(Math.log(aCount + 1) / Math.LN10), 3);
     bCount = Math.min(Math.ceil(Math.log(bCount + 1) / Math.LN10), 3);
-    // IMPORTANT: It is completely assumed the first node is a TEXT_NODE, so
-    //            ensure this in the HTML file counterpart when you make
-    //            changes
-    cell.nodeAt(0).firstChild.nodeValue = threePlus.slice(0, aCount) +
-                                          sixSpace.slice(aCount + bCount) +
-                                          threeMinus.slice(0, bCount);
+    textNode.nodeValue = threePlus.slice(0, aCount) +
+                         sixSpace.slice(aCount + bCount) +
+                         threeMinus.slice(0, bCount);
 };
 
 /******************************************************************************/
@@ -256,35 +256,12 @@ var buildAllDynamicFilters = function() {
 
     // Remove and reuse all rows: the order may have changed, we can't just
     // reuse them in-place.
-    rowsToRecycle = uDom('#privacyInfo ~ div').detach();
+    rowsToRecycle = uDom('#dynamicFilteringContainer > div:nth-of-type(7) ~ div').detach();
 
-    allDomains = {};
-    allDomainCount = touchedDomainCount = 0;
-
-    // Sort hostnames. First-party hostnames must always appear at the top
-    // of the list.
-    var desHostnameDone = {};
-    var keys = Object.keys(popupData.dynamicFilterRules)
-                     .sort(rulekeyCompare);
-    var key, des;
-    for ( var i = 0; i < keys.length; i++ ) {
-        key = keys[i];
-        // Specific-type rules -- these are built-in
-        if ( key.slice(-1) !== '*' ) {
-            continue;
-        }
-        des = key.slice(2, key.indexOf(' ', 2));
-        if ( desHostnameDone.hasOwnProperty(des) ) {
-            continue;
-        }
-        addDynamicFilterRow(des);
-        desHostnameDone[des] = true;
+    var n = allHostnameRows.length;
+    for ( var i = 0; i < n; i++ ) {
+        addDynamicFilterRow(allHostnameRows[i]);
     }
-
-    var summary = vAPI.i18n('popupHitDomainCountPrompt')
-                      .replace('{{count}}', touchedDomainCount.toLocaleString())
-                      .replace('{{total}}', allDomainCount.toLocaleString());
-    uDom('#privacyInfo').text(summary);
 
     if ( dfPaneBuilt !== true ) {
         uDom('#dynamicFilteringContainer')
@@ -295,6 +272,53 @@ var buildAllDynamicFilters = function() {
     }
 
     updateAllDynamicFilters();
+};
+
+/******************************************************************************/
+
+var renderPrivacyExposure = function() {
+    allDomains = {};
+    allDomainCount = touchedDomainCount = 0;
+    allHostnameRows = [];
+
+    // Sort hostnames. First-party hostnames must always appear at the top
+    // of the list.
+    var desHostnameDone = {};
+    var keys = Object.keys(popupData.dynamicFilterRules)
+                     .sort(rulekeyCompare);
+    var key, des, hnDetails;
+    for ( var i = 0; i < keys.length; i++ ) {
+        key = keys[i];
+        des = key.slice(2, key.indexOf(' ', 2));
+        // Specific-type rules -- these are built-in
+        if ( des === '*' || desHostnameDone.hasOwnProperty(des) ) {
+            continue;
+        }
+        hnDetails = popupData.hostnameDict[des] || {};
+        if ( allDomains.hasOwnProperty(hnDetails.domain) === false ) {
+            allDomains[hnDetails.domain] = false;
+            allDomainCount += 1;
+        }
+        if ( hnDetails.allowCount !== 0 ) {
+            if ( allDomains[hnDetails.domain] === false ) {
+                allDomains[hnDetails.domain] = true;
+                touchedDomainCount += 1;
+            }
+        }
+        allHostnameRows.push(des);
+        desHostnameDone[des] = true;
+    }
+
+    // The root page domain must always be counted as connected: that's from 
+    // where the root document was fetched.
+    if ( allDomains[popupData.pageDomain] !== true ) {
+        allDomains[popupData.pageDomain] = true;
+        touchedDomainCount += 1;
+    }
+
+    var summary = domainsHitStr.replace('{{count}}', touchedDomainCount.toLocaleString())
+                               .replace('{{total}}', allDomainCount.toLocaleString());
+    uDom('#popupHitDomainCount').text(summary);
 };
 
 /******************************************************************************/
@@ -318,40 +342,36 @@ var renderPopup = function() {
                     .attr('href', 'devtools.html?tabId=' + popupData.tabId);
     uDom('#gotoPick').toggleClass('enabled', popupData.canElementPicker === true);
 
-    var or = vAPI.i18n('popupOr');
     var blocked = popupData.pageBlockedRequestCount;
     var total = popupData.pageAllowedRequestCount + blocked;
-    var html = [];
+    var text = [];
     if ( total === 0 ) {
-        html.push('0');
+        text.push(formatNumber(0));
     } else {
-        html.push(
+        text.push(
             formatNumber(blocked),
-            '<span class="dim">&nbsp;',
-            or,
-            '&nbsp;',
-            formatNumber(Math.floor(blocked * 100 / total)),
-            '%</span>'
+            '\u00a0', orStr, '\u00a0',
+            formatNumber(Math.floor(blocked * 100 / total)), '%'
         );
     }
-    uDom('#page-blocked').html(html.join(''));
+    uDom('#page-blocked').text(text.join(''));
 
     blocked = popupData.globalBlockedRequestCount;
     total = popupData.globalAllowedRequestCount + blocked;
-    html = [];
+    text = [];
     if ( total === 0 ) {
-        html.push('0');
+        text.push(formatNumber(0));
     } else {
-        html.push(
+        text.push(
             formatNumber(blocked),
-            '<span class="dim">&nbsp;',
-            or,
-            '&nbsp;',
-            formatNumber(Math.floor(blocked * 100 / total)),
-            '%</span>'
+            '\u00a0', orStr, '\u00a0',
+            formatNumber(Math.floor(blocked * 100 / total)), '%'
         );
     }
-    uDom('#total-blocked').html(html.join(''));
+    uDom('#total-blocked').text(text.join(''));
+
+    // This will collate all domains, touched or not
+    renderPrivacyExposure();
 
     // https://github.com/gorhill/uBlock/issues/470
     // This must be done here, to be sure the popup is resized properly
@@ -594,7 +614,7 @@ uDom.onLoad(function() {
     uDom('#switch').on('click', toggleNetFilteringSwitch);
     uDom('#gotoPick').on('click', gotoPick);
     uDom('a[href]').on('click', gotoURL);
-    uDom('#dfToggler').on('click', toggleDynamicFiltering);
+    uDom('h2').on('click', toggleDynamicFiltering);
     uDom('#refresh').on('click', reloadTab);
 });
 

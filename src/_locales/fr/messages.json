@@ -151,8 +151,16 @@
     "message":"Les cadres de tierce-partie sont <b>bloqués<\/b> n'importe où par défaut",
     "description":""
   },
+  "popupAnyRulePrompt":{
+    "message":"Tout",
+    "description":""
+  },
   "popupImageRulePrompt":{
     "message":"Images",
+    "description":""
+  },
+  "popup3pAnyRulePrompt":{
+    "message":"Tierce-partie",
     "description":""
   },
   "popupInlineScriptRulePrompt":{
@@ -172,8 +180,12 @@
     "description":""
   },
   "popupHitDomainCountPrompt":{
-    "message":"Connecté sur {{count}} domaine(s) distinct(s) pour un total de {{total}}",
-    "description":"appear in dynamic filtering pane"
+    "message":"Nombre de domaines connectés",
+    "description":"appears in popup"
+  },
+  "popupHitDomainCount":{
+    "message":"{{count}} sur un total de {{total}}",
+    "description":"appears in popup"
   },
   "pickerCreate":{
     "message":"Créer",

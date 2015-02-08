@@ -32,6 +32,7 @@
     var vAPI = self.vAPI = self.vAPI || {};
 
     vAPI.safari = true;
+    var noopFunc = function(){};
 
     /******************************************************************************/
 
@@ -43,20 +44,6 @@
     /******************************************************************************/
 
     vAPI.app.restart = function() {};
-
-    /******************************************************************************/
-
-    // addContentScriptFromURL allows whitelisting,
-    // so load sitepaching this way, instead of adding it to the Info.plist
-
-    safari.extension.addContentScriptFromURL(
-        safari.extension.baseURI + 'js/sitepatch-safari.js', [
-        'http://www.youtube.com/*',
-        'https://www.youtube.com/*',
-        'http://www.youtube-nocookie.com/*',
-        'https://www.youtube-nocookie.com/*'
-    ]
-    );
 
     /******************************************************************************/
 
@@ -219,9 +206,12 @@
     /******************************************************************************/
 
     vAPI.tabs.getTabId = function(tab) {
+        if(typeof tab.uBlockCachedID !== "undefined") {
+            return tab.uBlockCachedID;
+        }
         for(var i in vAPI.tabs.stack) {
             if(vAPI.tabs.stack[i] === tab) {
-                return +i;
+                return (tab.uBlockCachedID = +i);
             }
         }
 
@@ -492,7 +482,7 @@
     vAPI.messaging = {
         listeners: {},
         defaultHandler: null,
-        NOOPFUNC: function() {},
+        NOOPFUNC: noopFunc, 
         UNHANDLED: 'vAPI.messaging.notHandled'
     };
 
@@ -504,18 +494,40 @@
 
     /******************************************************************************/
 
+    var CallbackWrapper = function(request, port) {
+        // No need to bind every single time
+        this.callback = this.proxy.bind(this);
+        this.messaging = vAPI.messaging;
+        this.init(request, port);
+    };
+    CallbackWrapper.junkyard = [];
+
+    CallbackWrapper.factory = function(request, port) {
+        var wrapper = CallbackWrapper.junkyard.pop();
+        if(wrapper) {
+            wrapper.init(request, port);
+            return wrapper;
+        }
+        return new CallbackWrapper(request, port);
+    };
+    CallbackWrapper.prototype.init = function(request, port) {
+        this.request = request;
+        this.port = port;
+    };
+    CallbackWrapper.prototype.proxy = function(response) {
+        this.port.dispatchMessage(this.request.name, {
+            requestId: this.request.message.requestId,
+            channelName: this.request.message.channelName,
+            msg: response !== undefined ? response: null
+        });
+        this.port = this.request = null;
+        CallbackWrapper.junkyard.push(this);
+    };
+
     vAPI.messaging.onMessage = function(request) {
         var callback = vAPI.messaging.NOOPFUNC;
         if(request.message.requestId !== undefined) {
-            callback = function(response) {
-                request.target.page.dispatchMessage(
-                    request.name, {
-                        requestId: request.message.requestId,
-                        channelName: request.message.channelName,
-                        msg: response !== undefined ? response : null
-                    }
-                );
-            };
+            callback = CallbackWrapper.factory(request, request.target.page).callback;
         }
 
         var sender = {
@@ -620,21 +632,20 @@
             }
             e.stopPropagation && e.stopPropagation();
             switch(e.message.type) {
-                case "isWhiteListed":
-                    e.message = !µb.getNetFilteringSwitch(e.message.url);
-                    break;
-                case "navigatedToNew":
+                case "main_frame":
                     vAPI.tabs.onNavigation({
                         url: e.message.url,
                         frameId: 0,
                         tabId: vAPI.tabs.getTabId(e.target)
                     });
-                    break;
+                    // Don't break here; let main_frame go through
                 case "popup":
                     if(e.message.url === 'about:blank') {
                         vAPI.tabs.popupCandidate = vAPI.tabs.getTabId(e.target);
                         e.message = true;
-                    } else {
+                        return;
+                    }
+                    else {
                         e.message = !vAPI.tabs.onPopup({
                             url: e.message.url,
                             tabId: 0,
@@ -650,17 +661,15 @@
                     });
                     break;
                 default:
-                    if(!blockableTypes.contains(e.message.type)) {
-                        e.message = true;
-                        return;
-                    }
                     e.message.hostname = µb.URI.hostnameFromURI(e.message.url);
                     e.message.tabId = vAPI.tabs.getTabId(e.target);
                     var blockVerdict = onBeforeRequestClient(e.message);
                     if(blockVerdict && blockVerdict.cancel) {
                         e.message = false;
+                        return;
                     } else {
                         e.message = true;
+                        return;
                     }
             }
             return;

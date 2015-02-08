@@ -151,8 +151,16 @@
     "message":"Frames de terceiros são <b>bloqueados<\/b> em todo o lado por predefinição",
     "description":""
   },
+  "popupAnyRulePrompt":{
+    "message":"tudo",
+    "description":""
+  },
   "popupImageRulePrompt":{
     "message":"imagens",
+    "description":""
+  },
+  "popup3pAnyRulePrompt":{
+    "message":"Scripts de terceiros",
     "description":""
   },
   "popupInlineScriptRulePrompt":{
@@ -172,8 +180,12 @@
     "description":""
   },
   "popupHitDomainCountPrompt":{
-    "message":"Conectado a {{count}} domínio(s) distinto(s)",
-    "description":"appear in dynamic filtering pane"
+    "message":"domínios conectados",
+    "description":"appears in popup"
+  },
+  "popupHitDomainCount":{
+    "message":"{{count}} de {{total}}",
+    "description":"appears in popup"
   },
   "pickerCreate":{
     "message":"Criar",

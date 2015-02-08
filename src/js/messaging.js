@@ -56,7 +56,7 @@ var onMessage = function(request, sender, callback) {
             break;
 
         case 'getAppData':
-            response = vAPI.app;
+            response = {name: vAPI.app.name, version: vAPI.app.version};
             break;
 
         case 'getUserSettings':
@@ -145,7 +145,9 @@ var getHostnameDict = function(hostnameToCountMap) {
 var getDynamicFilterRules = function(srcHostname, desHostnames) {
     var r = {};
     var dFiltering = µb.dynamicNetFilteringEngine;
+    r['/ * *'] = dFiltering.evaluateCellZY('*', '*', '*').toFilterString();
     r['/ * image'] = dFiltering.evaluateCellZY('*', '*', 'image').toFilterString();
+    r['/ * 3p'] = dFiltering.evaluateCellZY('*', '*', '3p').toFilterString();
     r['/ * inline-script'] = dFiltering.evaluateCellZY('*', '*', 'inline-script').toFilterString();
     r['/ * 1p-script'] = dFiltering.evaluateCellZY('*', '*', '1p-script').toFilterString();
     r['/ * 3p-script'] = dFiltering.evaluateCellZY('*', '*', '3p-script').toFilterString();
@@ -154,7 +156,9 @@ var getDynamicFilterRules = function(srcHostname, desHostnames) {
         return r;
     }
 
+    r['. * *'] = dFiltering.evaluateCellZY(srcHostname, '*', '*').toFilterString();
     r['. * image'] = dFiltering.evaluateCellZY(srcHostname, '*', 'image').toFilterString();
+    r['. * 3p'] = dFiltering.evaluateCellZY(srcHostname, '*', '3p').toFilterString();
     r['. * inline-script'] = dFiltering.evaluateCellZY(srcHostname, '*', 'inline-script').toFilterString();
     r['. * 1p-script'] = dFiltering.evaluateCellZY(srcHostname, '*', '1p-script').toFilterString();
     r['. * 3p-script'] = dFiltering.evaluateCellZY(srcHostname, '*', '3p-script').toFilterString();
@@ -329,7 +333,7 @@ var onMessage = function(request, sender, callback) {
 
     switch ( request.what ) {
         case 'retrieveDomainCosmeticSelectors':
-            if ( pageStore && pageStore.getNetFilteringSwitch() ) {
+            if ( pageStore && pageStore.getSpecificCosmeticFilteringSwitch() ) {
                 response = µb.cosmeticFilteringEngine.retrieveDomainSelectors(request);
             }
             break;
@@ -423,7 +427,10 @@ var filterRequest = function(pageStore, details) {
     details.requestHostname = µburi.hostnameFromURI(details.requestURL);
     details.requestType = tagNameToRequestTypeMap[details.tagName];
     if ( µb.isBlockResult(pageStore.filterRequest(details)) ) {
-        return { collapse: µb.userSettings.collapseBlocked };
+        return {
+            collapse: µb.userSettings.collapseBlocked,
+            id: details.id
+        };
     }
 };
 
@@ -446,7 +453,7 @@ var onMessage = function(details, sender, callback) {
 
     switch ( details.what ) {
         case 'retrieveGenericCosmeticSelectors':
-            if ( pageStore && pageStore.getCosmeticFilteringSwitch() ) {
+            if ( pageStore && pageStore.getGenericCosmeticFilteringSwitch() ) {
                 response = µb.cosmeticFilteringEngine.retrieveGenericSelectors(details);
             }
             break;
@@ -465,7 +472,11 @@ var onMessage = function(details, sender, callback) {
         // Evaluate a single request
         case 'filterRequest':
             if ( pageStore && pageStore.getNetFilteringSwitch() ) {
+                // console.log('contentscript-end.js > filterRequest(%o)', details);
                 response = filterRequest(pageStore, details);
+            }
+            if ( response === undefined ) {
+                response = { id: details.id };
             }
             break;
 

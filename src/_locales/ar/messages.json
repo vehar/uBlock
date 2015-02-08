@@ -20,11 +20,11 @@
     "description":"appears as tab name in dashboard"
   },
   "1pPageName":{
-    "message":"الفلاتر الخاصة بك",
+    "message":"الفلاتر الخاصة بي",
     "description":"appears as tab name in dashboard"
   },
   "rulesPageName":{
-    "message":"القواعد الخاصة بك",
+    "message":"القواعد الخاصة بي",
     "description":"appears as tab name in dashboard"
   },
   "whitelistPageName":{
@@ -32,7 +32,7 @@
     "description":"appears as tab name in dashboard"
   },
   "statsPageName":{
-    "message":"ميكرو بلوك - سجل الإتصال بالشبكة",
+    "message":"\"µBlock\" — سجل الإتصال بالشبكة",
     "description":"Title for the network request log window"
   },
   "aboutPageName":{
@@ -72,108 +72,120 @@
     "description":"English: Go to request log"
   },
   "popupSiteInlineScriptEnabled":{
-    "message":"Inline <code>script<\/code> tags are <b>allowed<\/b> on this site",
+    "message":"في خط <code>سكربت<\/code> شارات <b>المسموح بها<\/b> على هذا الموقع",
     "description":""
   },
   "popupSiteInlineScriptDisabled":{
-    "message":"Inline <code>script<\/code> tags are <b>blocked<\/b> on this site",
+    "message":"في خط <code>سكربت<\/code> شارات <b>محجوبة<\/b> على هذا الموقع",
     "description":""
   },
   "popupSite1pScriptEnabled":{
-    "message":"1st-party scripts are <b>allowed<\/b> on this site",
+    "message":"نصوص برمجة الطرف الأول <b>مسموح<\/b> بها على هذا الموقع",
     "description":""
   },
   "popupSite1pScriptDisabled":{
-    "message":"1st-party scripts are <b>blocked<\/b> on this site",
+    "message":"نصوص برمجة الطرف الأول <b>محظورة<\/b> على هذا الموقع",
     "description":""
   },
   "popupSite3pScriptEnabled":{
-    "message":"3rd-party scripts are <b>allowed<\/b> on this site",
+    "message":"نصوص برمجة الطرف الثالث <b>مسموح<\/b> بها على هذا الموقع",
     "description":""
   },
   "popupSite3pScriptDisabled":{
-    "message":"3rd-party scripts are <b>blocked<\/b> on this site",
+    "message":"نصوص برمجة الطرف الثالث <b>محظورة<\/b> على هذا الموقع",
     "description":""
   },
   "popupSite1pFrameEnabled":{
-    "message":"1st-party frames are <b>allowed<\/b> on this site",
+    "message":"إطارات الطرف الأول <b>مسموح<\/b> بها على هذا الموقع",
     "description":""
   },
   "popupSite1pFrameDisabled":{
-    "message":"1st-party frames are <b>blocked<\/b> on this site",
+    "message":"إطارات الطرف الأول <b>محظورة<\/b> على هذا الموقع",
     "description":""
   },
   "popupSite3pFrameEnabled":{
-    "message":"3rd-party frames are <b>allowed<\/b> on this site",
+    "message":"إطارات الطرف الثالث <b>مسموح<\/b> بها على هذا الموقع",
     "description":""
   },
   "popupSite3pFrameDisabled":{
-    "message":"3rd-party frames are <b>blocked<\/b> on this site",
+    "message":"إطارات الطرف الثالث <b>محظورة<\/b> على هذا الموقع",
     "description":""
   },
   "popupDefaultInlineScriptEnabled":{
-    "message":"Inline <code>script<\/code> tags are <b>allowed<\/b> everywhere by default",
+    "message":"تداخل <code> نصوص برمجية <\/code> ذات  شارات <b>مسموح بها<\/b>  في كل مكان إفتراضيا",
     "description":""
   },
   "popupDefaultInlineScriptDisabled":{
-    "message":"Inline <code>script<\/code> tags are <b>blocked<\/b> everywhere by default",
+    "message":"تداخل <code> نصوص برمجية <\/code> ذات  شارات <b> محظورة <\/b>  في كل مكان إفتراضيا",
     "description":""
   },
   "popupDefault1pScriptEnabled":{
-    "message":"1st-party scripts are <b>allowed<\/b> everywhere by default",
+    "message":"نصوص برمجة الطرف الاول <b>مسموح<\/b> بها في كل مكان إفتراضيا",
     "description":""
   },
   "popupDefault1pScriptDisabled":{
-    "message":"1st-party scripts are <b>blocked<\/b> everywhere by default",
+    "message":"نصوص برمجة الطرف الاول <b>محظورة<\/b> في كل مكان إفتراضيا",
     "description":""
   },
   "popupDefault3pScriptEnabled":{
-    "message":"3rd-party scripts are <b>allowed<\/b> everywhere by default",
+    "message":"نصوص برمجة الطرف الثالث <b>مسموح<\/b> بها في كل مكان إفتراضيا",
     "description":""
   },
   "popupDefault3pScriptDisabled":{
-    "message":"3rd-party scripts are <b>blocked<\/b> everywhere by default",
+    "message":"نصوص برمجة الطرف الثالث <b>محظورة<\/b> في كل مكان إفتراضيا",
     "description":""
   },
   "popupDefault1pFrameEnabled":{
-    "message":"1st-party frames are <b>allowed<\/b> everywhere by default",
+    "message":"إطارات الطرف الاول <b>مسموح<\/b> بها في كل مكان إفتراضيا",
     "description":""
   },
   "popupDefault1pFrameDisabled":{
-    "message":"1st-party frames are <b>blocked<\/b> everywhere by default",
+    "message":"إطارات الطرف الاول <b>محظورة<\/b> في كل مكان إفتراضيا",
     "description":""
   },
   "popupDefault3pFrameEnabled":{
-    "message":"3rd-party frames are <b>allowed<\/b> everywhere by default",
+    "message":"إطارات الطرف الثالث <b>مسموح<\/b> بها في كل مكان إفتراضيا",
     "description":""
   },
   "popupDefault3pFrameDisabled":{
-    "message":"3rd-party frames are <b>blocked<\/b> everywhere by default",
+    "message":"إطارات الطرف الثالث <b>محظورة<\/b> في كل مكان إفتراضيا",
+    "description":""
+  },
+  "popupAnyRulePrompt":{
+    "message":"كل",
     "description":""
   },
   "popupImageRulePrompt":{
     "message":"صور",
     "description":""
   },
+  "popup3pAnyRulePrompt":{
+    "message":"جهة خارجية",
+    "description":""
+  },
   "popupInlineScriptRulePrompt":{
-    "message":"inline scripts",
+    "message":"نصوص برمجة بين السطور",
     "description":""
   },
   "popup1pScriptRulePrompt":{
-    "message":"1st-party scripts",
+    "message":"نصوص برمجة الطرف الاول",
     "description":""
   },
   "popup3pScriptRulePrompt":{
-    "message":"3rd-party scripts",
+    "message":"نصوص برمجة من طرف خارجي",
     "description":""
   },
   "popup3pFrameRulePrompt":{
-    "message":"3rd-party frames",
+    "message":"إطارات من طرف خارجي",
     "description":""
   },
   "popupHitDomainCountPrompt":{
-    "message":"Connected to {{count}} distinct domain(s) out of {{total}}",
-    "description":"appear in dynamic filtering pane"
+    "message":"النطاقات الملموسة",
+    "description":"appears in popup"
+  },
+  "popupHitDomainCount":{
+    "message":"{{count}} من {{total}}",
+    "description":"appears in popup"
   },
   "pickerCreate":{
     "message":"إنشاء",
@@ -220,7 +232,7 @@
     "description":"English: "
   },
   "settingsExperimentalPrompt":{
-    "message":"فعل المميزات التجريبية",
+    "message":"تفعيل الخصائص التجريبية (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Experimental-features'>حول<\/a>)",
     "description":"English: Enable experimental features"
   },
   "3pListsOfBlockedHostsPrompt":{
@@ -292,7 +304,7 @@
     "description":"English: One URL per line. Lines prefixed with &lsquo;!&rsquo; will be ignored. Invalid URLs will be silently ignored."
   },
   "3pExternalListsApply":{
-    "message":"حفظ",
+    "message":"تحليل",
     "description":"English: Parse"
   },
   "3pExternalListPurge":{
@@ -328,7 +340,7 @@
     "description":"English: Apply changes"
   },
   "rulesEdit":{
-    "message":"تحرير",
+    "message":"تعديل",
     "description":"Will enable manual-edit mode (textarea)"
   },
   "rulesEditSave":{
@@ -336,7 +348,7 @@
     "description":"Will save manually-edited content and exit manual-edit mode"
   },
   "rulesEditDiscard":{
-    "message":"نبذ",
+    "message":"إلغاء",
     "description":"Will discard manually-edited content and exit manual-edit mode"
   },
   "rulesImport":{
@@ -352,7 +364,7 @@
     "description":"default file name to use"
   },
   "rulesHint":{
-    "message":"List of your dynamic filtering rules.",
+    "message":"قائمة بقواعد الفلترة الديناميكية الخاصة بك.",
     "description":"English: List of your dynamic filtering rules."
   },
   "rulesFormatHint":{
@@ -420,7 +432,7 @@
     "description":"English: No non-blocked requests logged for this page"
   },
   "logBehindTheScene":{
-    "message":"Behind the scene",
+    "message":"خلف الكواليس",
     "description":"Pretty name for behind-the-scene network requests"
   },
   "aboutChangelog":{
@@ -440,11 +452,11 @@
     "description":"English: Contributors"
   },
   "aboutBackupDataButton":{
-    "message":"النسخ الإحتياطي للملف...",
+    "message":"النسخ الإحتياطي لملف",
     "description":"English: Backup to file"
   },
   "aboutBackupFilename":{
-    "message":"my-ublock-backup_{{datetime}}.txt",
+    "message":"إحتياط-ublock-الخاص-بي_{{datetime}}.txt",
     "description":"English: my-ublock-backup_{{datetime}}.txt"
   },
   "aboutRestoreDataButton":{
@@ -452,7 +464,7 @@
     "description":"English: Restore from file..."
   },
   "aboutResetDataButton":{
-    "message":"إبدأ من جديد...",
+    "message":"إعادة الضبط للوضع الافتراضي...",
     "description":"English: Reset to default settings..."
   },
   "aboutRestoreDataConfirm":{
@@ -460,11 +472,11 @@
     "description":"Message asking user to confirm restore"
   },
   "aboutRestoreDataError":{
-    "message":"تعذر قراءة البيانات",
+    "message":"تعذر قراءة البيانات أو إنها غير صالحة",
     "description":"Message to display when an error occurred during restore"
   },
   "aboutResetDataConfirm":{
-    "message":"كل إعداداتك سيتم مسحها، و ميكروبلوك سيعيد التشغيل.\n\n\nإعادة تركيب ميكروبلوك على الإعدادات الأصلية؟",
+    "message":"كل إعداداتك سيتم إلغائها، و سيتم إعادة تشغيل \"µBlock\".\n\n\nإعادة ضبط \"µBlock\" على الإعدادات الأصلية؟",
     "description":"Message asking user to confirm reset"
   },
   "errorCantConnectTo":{

@@ -151,8 +151,16 @@
     "message":"任何第三方框架在默认情况下都将被 <b>屏蔽<\/b>",
     "description":""
   },
+  "popupAnyRulePrompt":{
+    "message":"全部",
+    "description":""
+  },
   "popupImageRulePrompt":{
     "message":"图像",
+    "description":""
+  },
+  "popup3pAnyRulePrompt":{
+    "message":"第三方",
     "description":""
   },
   "popupInlineScriptRulePrompt":{
@@ -172,8 +180,12 @@
     "description":""
   },
   "popupHitDomainCountPrompt":{
-    "message":"连接到 {{count}} 不同的域",
-    "description":"appear in dynamic filtering pane"
+    "message":"施加影响于",
+    "description":"appears in popup"
+  },
+  "popupHitDomainCount":{
+    "message":"{{count}} \/ {{total}} 个域",
+    "description":"appears in popup"
   },
   "pickerCreate":{
     "message":"创建",

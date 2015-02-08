@@ -151,8 +151,16 @@
     "message":"Kolmanda osapoole raamid on kõikjal vaikimisi <b>keelatud<\/b>",
     "description":""
   },
+  "popupAnyRulePrompt":{
+    "message":"kõik",
+    "description":""
+  },
   "popupImageRulePrompt":{
     "message":"pildid",
+    "description":""
+  },
+  "popup3pAnyRulePrompt":{
+    "message":"3. osapool",
     "description":""
   },
   "popupInlineScriptRulePrompt":{
@@ -172,8 +180,12 @@
     "description":""
   },
   "popupHitDomainCountPrompt":{
-    "message":"Ühendatud {{count}}\/{{total}} eraldiseisva domeeniga",
-    "description":"appear in dynamic filtering pane"
+    "message":"domeene ühendatud",
+    "description":"appears in popup"
+  },
+  "popupHitDomainCount":{
+    "message":"{{count}}\/{{total}}",
+    "description":"appears in popup"
   },
   "pickerCreate":{
     "message":"Loo",

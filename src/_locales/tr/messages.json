@@ -151,8 +151,16 @@
     "message":"3. parti çerçeveler heryerde varsayılan olarak <b>engelleniyor<\/b>",
     "description":""
   },
+  "popupAnyRulePrompt":{
+    "message":"Tümü",
+    "description":""
+  },
   "popupImageRulePrompt":{
     "message":"resimler",
+    "description":""
+  },
+  "popup3pAnyRulePrompt":{
+    "message":"3.-parti",
     "description":""
   },
   "popupInlineScriptRulePrompt":{
@@ -172,8 +180,12 @@
     "description":""
   },
   "popupHitDomainCountPrompt":{
-    "message":"{{total}} ayrı alan adından {{count}} adedine bağlanmış",
-    "description":"appear in dynamic filtering pane"
+    "message":"domains connected",
+    "description":"appears in popup"
+  },
+  "popupHitDomainCount":{
+    "message":"{{count}} out of {{total}}",
+    "description":"appears in popup"
   },
   "pickerCreate":{
     "message":"Oluştur",

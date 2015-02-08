@@ -151,8 +151,16 @@
     "message":"Frames von Drittseiten werden überall standardmäßig <b>blockiert<\/b>",
     "description":""
   },
+  "popupAnyRulePrompt":{
+    "message":"Alle Ressourcen",
+    "description":""
+  },
   "popupImageRulePrompt":{
     "message":"Bilder",
+    "description":""
+  },
+  "popup3pAnyRulePrompt":{
+    "message":"Ressourcen von Drittseiten",
     "description":""
   },
   "popupInlineScriptRulePrompt":{
@@ -172,8 +180,12 @@
     "description":""
   },
   "popupHitDomainCountPrompt":{
-    "message":"Verbunden mit {{count}} unterschiedlichen Domains aus insgesamt {{total}}",
-    "description":"appear in dynamic filtering pane"
+    "message":"Verbundene Domains",
+    "description":"appears in popup"
+  },
+  "popupHitDomainCount":{
+    "message":"{{count}} von insgesamt {{total}}",
+    "description":"appears in popup"
   },
   "pickerCreate":{
     "message":"Erzeugen",

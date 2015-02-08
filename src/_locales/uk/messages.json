@@ -151,8 +151,16 @@
     "message":"Сторонні фрейми <b>заблоковані<\/b> будь-де за замовчанням",
     "description":""
   },
+  "popupAnyRulePrompt":{
+    "message":"всі",
+    "description":""
+  },
   "popupImageRulePrompt":{
     "message":"зображення",
+    "description":""
+  },
+  "popup3pAnyRulePrompt":{
+    "message":"сторонні",
     "description":""
   },
   "popupInlineScriptRulePrompt":{
@@ -172,8 +180,12 @@
     "description":""
   },
   "popupHitDomainCountPrompt":{
-    "message":"Підключено до {{count}} різних доменів({{total}} всього доменів)",
-    "description":"appear in dynamic filtering pane"
+    "message":"доменів під’єднано",
+    "description":"appears in popup"
+  },
+  "popupHitDomainCount":{
+    "message":"{{count}} з {{total}}",
+    "description":"appears in popup"
   },
   "pickerCreate":{
     "message":"Створити",
