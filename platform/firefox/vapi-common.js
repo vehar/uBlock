@@ -25,11 +25,13 @@
 
 /******************************************************************************/
 
-(function() {
+(function(self) {
 
 'use strict';
 
 self.vAPI = self.vAPI || {};
+
+var hostName = 'ublock';
 
 /******************************************************************************/
 
@@ -93,7 +95,7 @@ vAPI.insertHTML = (function() {
 /******************************************************************************/
 
 vAPI.getURL = function(path) {
-    return 'chrome://' + location.host + '/content/' + path.replace(/^\/+/, '');
+    return 'chrome://' + hostName + '/content/' + path.replace(/^\/+/, '');
 };
 
 /******************************************************************************/
@@ -101,7 +103,7 @@ vAPI.getURL = function(path) {
 vAPI.i18n = (function() {
     var stringBundle = Components.classes['@mozilla.org/intl/stringbundle;1']
         .getService(Components.interfaces.nsIStringBundleService)
-        .createBundle('chrome://' + location.host + '/locale/messages.properties');
+        .createBundle('chrome://' + hostName + '/locale/messages.properties');
 
     return function(s) {
         try {
@@ -112,16 +114,16 @@ vAPI.i18n = (function() {
     };
 })();
 
-setScriptDirection(navigator.language);
+setScriptDirection('en');
 
 /******************************************************************************/
 
 vAPI.closePopup = function() {
-    sendAsyncMessage(location.host + ':closePopup');
+    sendAsyncMessage(hostName + ':closePopup');
 };
 
 /******************************************************************************/
 
-})();
+})(this);
 
 /******************************************************************************/

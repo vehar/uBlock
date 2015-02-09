@@ -25,11 +25,13 @@
 
 this.EXPORTED_SYMBOLS = ['contentObserver'];
 
+/******************************************************************************/
+
 const {interfaces: Ci, utils: Cu} = Components;
 const {Services} = Cu.import('resource://gre/modules/Services.jsm', null);
 const hostName = Services.io.newURI(Components.stack.filename, null, null).host;
 
-// Cu.import('resource://gre/modules/devtools/Console.jsm');
+Cu.import('resource://gre/modules/devtools/Console.jsm');
 
 /******************************************************************************/
 
@@ -55,6 +57,7 @@ const contentObserver = {
     cpMessageName: hostName + ':shouldLoad',
     ignoredPopups: new WeakMap(),
     uniqueSandboxId: 1,
+    bgNet: Cu.import('chrome://ublock/content/main.js', null).uBackground.vAPI.net,
 
     get componentRegistrar() {
         return Components.manager.QueryInterface(Ci.nsIComponentRegistrar);
@@ -161,21 +164,22 @@ const contentObserver = {
         }
 
         let messageManager = getMessageManager(context);
-        let details = {
+
+        bgNet.shouldLoadListener({
             frameId: isTopLevel ? 0 : this.getFrameId(context),
             openerURL: openerURL,
             parentFrameId: parentFrameId,
             type: type,
             url: location.spec
-        };
+        });
 
-        if ( typeof messageManager.sendRpcMessage === 'function' ) {
+        /*if ( typeof messageManager.sendRpcMessage === 'function' ) {
             // https://bugzil.la/1092216
             messageManager.sendRpcMessage(this.cpMessageName, details);
         } else {
             // Compatibility for older versions
             messageManager.sendSyncMessage(this.cpMessageName, details);
-        }
+        }*/
 
         return this.ACCEPT;
     },

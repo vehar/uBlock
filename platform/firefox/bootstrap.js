@@ -29,12 +29,11 @@
 // Accessing the context of the background page:
 // var win = Services.appShell.hiddenDOMWindow.document.querySelector('iframe[src*=ublock]').contentWindow;
 
-let bgProcess;
-let version;
 const hostName = 'ublock';
 const restartListener = {
     get messageManager() {
-        return Components.classes['@mozilla.org/parentprocessmessagemanager;1']
+        return Components
+            .classes['@mozilla.org/parentprocessmessagemanager;1']
             .getService(Components.interfaces.nsIMessageListenerManager);
     },
 
@@ -47,57 +46,11 @@ const restartListener = {
 /******************************************************************************/
 
 function startup(data, reason) {
-    if ( data !== undefined ) {
-        version = data.version;
-    }
-
-    let appShell = Components.classes['@mozilla.org/appshell/appShellService;1']
-        .getService(Components.interfaces.nsIAppShellService);
-
-    let onReady = function(e) {
-        if ( e ) {
-            this.removeEventListener(e.type, onReady);
-        }
-
-        let hiddenDoc = appShell.hiddenDOMWindow.document;
-        bgProcess = hiddenDoc.documentElement.appendChild(
-            hiddenDoc.createElementNS('http://www.w3.org/1999/xhtml', 'iframe')
-        );
-        bgProcess.setAttribute(
-            'src',
-            'chrome://' + hostName + '/content/background.html#' + version
-        );
-
-        restartListener.messageManager.addMessageListener(
-            hostName + '-restart',
-            restartListener
-        );
-    };
-
-    if ( reason !== APP_STARTUP ) {
-        onReady();
-        return;
-    }
-
-    let ww = Components.classes['@mozilla.org/embedcomp/window-watcher;1']
-        .getService(Components.interfaces.nsIWindowWatcher);
-
-    ww.registerNotification({
-        observe: function(win, topic) {
-            if ( topic !== 'domwindowopened' ) {
-                return;
-            }
-
-            try {
-                appShell.hiddenDOMWindow;
-            } catch (ex) {
-                return;
-            }
-
-            ww.unregisterNotification(this);
-            win.addEventListener('DOMContentLoaded', onReady);
-        }
-    });
+    Components.utils.import('chrome://' + hostName + '/content/main.js');
+    restartListener.messageManager.addMessageListener(
+        hostName + '-restart',
+        restartListener
+    );
 }
 
 /******************************************************************************/
@@ -107,7 +60,8 @@ function shutdown(data, reason) {
         return;
     }
 
-    bgProcess.parentNode.removeChild(bgProcess);
+    uBackground.unload();
+    Components.utils.unload('chrome://' + hostName + '/content/main.js');
 
     if ( data === undefined ) {
         return;

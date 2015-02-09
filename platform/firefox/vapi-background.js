@@ -26,7 +26,7 @@
 
 /******************************************************************************/
 
-(function() {
+(function(self) {
 
 'use strict';
 
@@ -40,6 +40,7 @@ const {Services} = Cu.import('resource://gre/modules/Services.jsm', null);
 var vAPI = self.vAPI = self.vAPI || {};
 
 vAPI.firefox = true;
+var hostName = 'ublock';
 
 /******************************************************************************/
 
@@ -54,7 +55,7 @@ vAPI.app.restart = function() {
     // Listening in bootstrap.js
     Cc['@mozilla.org/childprocessmessagemanager;1']
         .getService(Ci.nsIMessageSender)
-        .sendAsyncMessage(location.host + '-restart');
+        .sendAsyncMessage(hostName + '-restart');
 };
 
 /******************************************************************************/
@@ -79,7 +80,7 @@ var SQLite = {
             throw Error('Should be a directory...');
         }
 
-        path.append(location.host + '.sqlite');
+        path.append(hostName + '.sqlite');
         this.db = Services.storage.openDatabase(path);
         this.db.executeSimpleSQL(
             'CREATE TABLE IF NOT EXISTS settings' +
@@ -379,7 +380,7 @@ vAPI.tabs.registerListeners = function() {
             for ( var tab of win.gBrowser.tabs ) {
                 var URI = tab.linkedBrowser.currentURI;
 
-                if ( URI.schemeIs('chrome') && URI.host === location.host ) {
+                if ( URI.schemeIs('chrome') && URI.host === hostName ) {
                     win.gBrowser.removeTab(tab);
                 }
             }
@@ -394,7 +395,8 @@ vAPI.tabs.getTabId = function(target) {
         return target.linkedPanel;
     }
 
-    var i, gBrowser = target.ownerDocument.defaultView.gBrowser;
+    var i;
+    var gBrowser = target.ownerDocument.defaultView.gBrowser;
 
     if ( !gBrowser ) {
         return -1;
@@ -615,7 +617,7 @@ vAPI.tabs.injectScript = function(tabId, details, callback) {
 
     details.file = vAPI.getURL(details.file);
     tab.linkedBrowser.messageManager.sendAsyncMessage(
-        location.host + ':broadcast',
+        hostName + ':broadcast',
         JSON.stringify({
             broadcast: true,
             channelName: 'vAPI',
@@ -762,7 +764,7 @@ vAPI.messaging.setup = function(defaultHandler) {
     this.defaultHandler = defaultHandler;
 
     this.globalMessageManager.addMessageListener(
-        location.host + ':background',
+        hostName + ':background',
         this.onMessage
     );
 
@@ -773,7 +775,7 @@ vAPI.messaging.setup = function(defaultHandler) {
 
         gmm.removeDelayedFrameScript(vAPI.messaging.frameScript);
         gmm.removeMessageListener(
-            location.host + ':background',
+            hostName + ':background',
             vAPI.messaging.onMessage
         );
     });
@@ -783,7 +785,7 @@ vAPI.messaging.setup = function(defaultHandler) {
 
 vAPI.messaging.broadcast = function(message) {
     this.globalMessageManager.broadcastAsyncMessage(
-        location.host + ':broadcast',
+        hostName + ':broadcast',
         JSON.stringify({broadcast: true, msg: message})
     );
 };
@@ -854,9 +856,9 @@ CallbackWrapper.prototype.proxy = function(response) {
 /******************************************************************************/
 
 var httpObserver = {
-    classDescription: 'net-channel-event-sinks for ' + location.host,
+    classDescription: 'net-channel-event-sinks for ' + hostName,
     classID: Components.ID('{dc8d6319-5f6e-4438-999e-53722db99e84}'),
-    contractID: '@' + location.host + '/net-channel-event-sinks;1',
+    contractID: '@' + hostName + '/net-channel-event-sinks;1',
     ABORT: Components.results.NS_BINDING_ABORTED,
     ACCEPT: Components.results.NS_SUCCEEDED,
     // Request types: https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIContentPolicy#Constants
@@ -1019,7 +1021,7 @@ var httpObserver = {
                     frameId,
                     parentFrameId
                 ]*/
-                channelData = channel.getProperty(location.host + 'reqdata');
+                channelData = channel.getProperty(hostName + 'reqdata');
             } catch (ex) {
                 return;
             }
@@ -1106,7 +1108,7 @@ var httpObserver = {
         // If request is not handled we may use the data in on-modify-request
         if ( channel instanceof Ci.nsIWritablePropertyBag ) {
             channel.setProperty(
-                location.host + 'reqdata',
+                hostName + 'reqdata',
                 [
                     lastRequest.type,
                     lastRequest.tabId,
@@ -1143,7 +1145,7 @@ var httpObserver = {
             // TODO: what if a behind-the-scene request is being redirected?
             // This data is present only for tabbed requests, so if this throws,
             // the redirection won't be evaluated and canceled (if necessary)
-            var channelData = oldChannel.getProperty(location.host + 'reqdata');
+            var channelData = oldChannel.getProperty(hostName + 'reqdata');
 
             if ( this.handlePopup(URI, channelData[1], channelData[2]) ) {
                 result = this.ABORT;
@@ -1164,7 +1166,7 @@ var httpObserver = {
 
             // Carry the data on in case of multiple redirects
             if ( newChannel instanceof Ci.nsIWritablePropertyBag ) {
-                newChannel.setProperty(location.host + 'reqdata', channelData);
+                newChannel.setProperty(hostName + 'reqdata', channelData);
             }
         } catch (ex) {
             // console.error(ex);
@@ -1180,28 +1182,28 @@ vAPI.net = {};
 
 /******************************************************************************/
 
+vAPI.net.shouldLoadListener = function(details) {
+    var lastRequest = httpObserver.lastRequest;
+    lastRequest.url = details.url;
+    lastRequest.type = details.type;
+    lastRequest.tabId = -1;
+    lastRequest.frameId = details.frameId;
+    lastRequest.parentFrameId = details.parentFrameId;
+    lastRequest.openerURL = details.openerURL;
+};
+
 vAPI.net.registerListeners = function() {
     // Since it's not used
     this.onBeforeSendHeaders = null;
 
     this.onBeforeRequest.types = new Set(this.onBeforeRequest.types);
 
-    var shouldLoadListenerMessageName = location.host + ':shouldLoad';
-    var shouldLoadListener = function(e) {
-        var details = e.data;
-        var lastRequest = httpObserver.lastRequest;
-        lastRequest.url = details.url;
-        lastRequest.type = details.type;
-        lastRequest.tabId = vAPI.tabs.getTabId(e.target);
-        lastRequest.frameId = details.frameId;
-        lastRequest.parentFrameId = details.parentFrameId;
-        lastRequest.openerURL = details.openerURL;
-    };
+    /*var shouldLoadListenerMessageName = hostName + ':shouldLoad';
 
     vAPI.messaging.globalMessageManager.addMessageListener(
         shouldLoadListenerMessageName,
         shouldLoadListener
-    );
+    );*/
 
     httpObserver.register();
 
@@ -1218,9 +1220,9 @@ vAPI.net.registerListeners = function() {
 /******************************************************************************/
 
 vAPI.toolbarButton = {
-    id: location.host + '-button',
+    id: hostName + '-button',
     type: 'view',
-    viewId: location.host + '-panel',
+    viewId: hostName + '-panel',
     label: vAPI.app.name,
     tooltiptext: vAPI.app.name,
     tabs: {/*tabId: {badge: 0, img: boolean}*/}
@@ -1281,14 +1283,14 @@ vAPI.toolbarButton.init = function() {
 
     CustomizableUI.createWidget(this);
     vAPI.messaging.globalMessageManager.addMessageListener(
-        location.host + ':closePopup',
+        hostName + ':closePopup',
         this.closePopup
     );
 
     cleanupTasks.push(function() {
         CustomizableUI.destroyWidget(this.id);
         vAPI.messaging.globalMessageManager.removeMessageListener(
-            location.host + ':closePopup',
+            hostName + ':closePopup',
             this.closePopup
         );
 
@@ -1326,7 +1328,7 @@ vAPI.toolbarButton.onBeforeCreated = function(doc) {
     var resizePopup = function() {
         var body = iframe.contentDocument.body;
         panel.parentNode.style.maxWidth = 'none';
-        // Set the hegiht first, then the width for proper resising
+        // Set the hegiht first, then the width for proper resizing
         panel.style.height = iframe.style.height = body.clientHeight + 'px';
         panel.style.width = iframe.style.width = body.clientWidth + 'px';
         updateTimer = null;
@@ -1334,7 +1336,7 @@ vAPI.toolbarButton.onBeforeCreated = function(doc) {
     var onPopupReady = function() {
         var win = this.contentWindow;
 
-        if ( !win || win.location.host !== location.host ) {
+        if ( !win || win.location.host !== hostName ) {
             return;
         }
 
@@ -1599,9 +1601,9 @@ vAPI.punycodeURL = function(url) {
 
 /******************************************************************************/
 
-// clean up when the extension is disabled
+// Clean up when the extension is disabled, invoked in bootstrap.js
 
-window.addEventListener('unload', function() {
+self.unload = function() {
     for ( var cleanup of cleanupTasks ) {
         cleanup();
     }
@@ -1611,10 +1613,10 @@ window.addEventListener('unload', function() {
     Cu.import(vAPI.getURL('frameModule.js'), frameModule);
     frameModule.contentObserver.unregister();
     Cu.unload(vAPI.getURL('frameModule.js'));
-});
+};
 
 /******************************************************************************/
 
-})();
+})(this);
 
 /******************************************************************************/
