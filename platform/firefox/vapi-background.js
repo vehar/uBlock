@@ -290,11 +290,9 @@ var windowWatcher = {
 
         } else if ( this.BrowserApp && this.BrowserApp.deck ) {
             // Fennec
-            // FIXME: this doesn't work
             var deck = this.BrowserApp.deck;
 
-            this.messageManager.addMessageListener('Content:LocationChange',
-                tabsProgressListenerFennec);
+            deck.addEventListener('DOMTitleChanged', windowWatcher.onLocationChange);
             deck.addEventListener('TabClose', windowWatcher.onTabClose);
             deck.addEventListener('TabSelect', windowWatcher.onTabSelect);
         }
@@ -302,6 +300,24 @@ var windowWatcher = {
         vAPI.contextMenu.register(this.document);
 
         // when new window is opened TabSelect doesn't run on the selected tab?
+    },
+
+    onLocationChange: function(e) {
+        // Fennec "equivalent" to tabsProgressListener.onLocationChange
+        // note that DOMTitleChanged is selected as it fires very early
+        // (before DOMContentLoaded), and it does fire even if there is no title
+
+        var tabId = vAPI.tabs.getTabId(e.target);
+        if ( tabId === null ) {
+            // probably not top level
+            return;
+        }
+
+        vAPI.tabs.onNavigation({
+            frameId: 0,
+            tabId: tabId,
+            url: e.target.location.href
+        });
     },
 
     observe: function(win, topic) {
@@ -338,25 +354,6 @@ var tabsProgressListener = {
             tabId: tabId,
             url: location.asciiSpec
         });
-    }
-};
-
-var tabsProgressListenerFennec = {
-    receiveMessage: function (message) {
-        var browser = message.target;
-        var data = message.data;
-        var spec = data.location;
-
-      console.log("location changed message received");
-      console.log("browser = " + browser + ", data = " + data + ", spec = " + spec);
-
-        tabsProgressListener.onLocationChange(
-            browser,
-            data.webProgress,
-            null,               // stub
-            spec,
-            data.flags
-        );
     }
 };
 
@@ -412,8 +409,7 @@ vAPI.tabs.registerListeners = function() {
                 // Fennec
                 var deck = win.BrowserApp.deck;
 
-                messageManager.removeMessageListener('Content:LocationChange',
-                    tabsProgressListenerFennec);
+                deck.removeEventListener('DOMTitleChanged', windowWatcher.onLocationChange);
                 deck.removeEventListener('TabClose', windowWatcher.onTabClose);
                 deck.removeEventListener('TabSelect', windowWatcher.onTabSelect);
 
@@ -439,10 +435,11 @@ vAPI.tabs.getTabId = function(target) {
             // target is a tab
             return target.id;
         } else {
-            // target is a browser
+            // target is a browser or window or contentDocument
             for ( var win of vAPI.tabs.getWindows() ) {
                 for ( var tab of win.BrowserApp.tabs ) {
-                    if ( tab.browser === target ) {
+                    if ( target === tab.browser ||
+                         target === tab.window.document ) {
                         return tab.id;
                     }
                 }
@@ -472,6 +469,8 @@ vAPI.tabs.getTabId = function(target) {
             return i;
         }
     }
+
+    return null;
 };
 
 /******************************************************************************/
